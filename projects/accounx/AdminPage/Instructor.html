@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<head>
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="script.js"></script>
+	
+	<title>Forgot Password</title>
+	<link rel="stylesheet" type="text/css" href="css/adminStyles.css"/>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>	
+	<script src="js/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+
+	<script src="popup/dist/sweetalert-dev.js"></script>
+	<link rel="stylesheet" href="popup/dist/sweetalert.css">
+	
+	<script>
+		$(document).ready(function() {
+			
+			var autocomplete = true;
+			var dataString = 'autocomplete='+true;
+			
+			$.ajax({
+				type: "POST",
+				url: "autocomplete.php",
+				data: dataString,
+				cache: false,
+				beforeSend: function(){ },
+				success: function(data){
+					  
+					  var orgParsedData = JSON.parse(data);
+					  var orgData = [];
+					  for(var x in orgParsedData){orgData.push(orgParsedData[x]);}
+					  
+					/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
+					$(document).ready(
+					  
+					  /* This is the function that will get executed after the DOM is fully loaded */
+					  function () {
+						
+					  /* binding the text box with the jQuery Auto complete function. */
+						$( "#Institution" ).autocomplete({
+						  /*Source refers to the list of fruits that are available in the auto complete list. */
+						  source:orgData,
+						  /* auto focus true means, the first item in the auto complete list is selected by default. therefore when the user hits enter,
+						  it will be loaded in the textbox */
+						  autoFocus: true ,
+
+						});
+					  }
+					);	
+				}
+			});					
+			
+			$('#submitInstructor').click(function()
+			{
+				var useremail=$("#useremail").val();
+				var userpassword = $("#userpassword").val();
+				var lastname = $("#Lname").val();
+				var Firstname = $("#Fname").val();
+				var Institution = $("#Institution").val();
+				
+				var dataString = 'useremail='+useremail+'&userpassword='+userpassword+'&lastname='+lastname+'&Firstname='+Firstname+'&Institution='+Institution;
+				if($.trim(Institution).length>0)
+				{	$.ajax({
+						type: "POST",
+						url: "Instructor.php",
+						data: dataString,
+						cache: false,
+						beforeSend: function(){ $("#submitNewSubscription").val('Please wait...');},
+						success: function(data){
+							if(data){
+								if(data == 1)
+								{
+									$("#submitNewSubscription").val('Submit');
+									sweetAlert("Instructor Added", "success");
+								}
+								else
+								{
+									$("#submitNewSubscription").val('Submit');
+									sweetAlert("Something wrong happened.", "error");								
+								}
+							}else{sweetAlert("Something wrong happened.", "error");}
+						}
+					});	
+					 
+					document.getElementById('useremail').value='';
+					document.getElementById('userpassword').value='';
+					document.getElementById('Fname').value='';
+					document.getElementById('Lname').value='';
+					document.getElementById('Institution').value='';
+				}
+				else{
+					sweetAlert("Your Form is incomplete", "Please fill in the relevent fields");
+				}
+			});
+		});
+		</script>
+
+</head>
+
+<title></title>
+
+<body id="userbody" >
+
+<section>
+
+	<circle>
+					<img src="../pictures/Logo.jpg"  height="40" width="100" ></img>
+				</circle>
+
+<div class="example">
+    <div class="menuholder">
+        <ul class="menu slide">
+            <li><a href="Instructor.html" class="red">Users</a></li>
+            <li><a href="Organization.html" class="orange">Organization</a>
+			<li><a href="subscription.html" class="yellow">Subsciption</a>
+			<li><a href="../index.php" class="orange">Logout</a>
+	  </ul>
+        <div class="back"></div>
+        <div class="shadow"></div>
+    </div>
+    <div style="clear:both"></div>
+	</div>
+
+
+	<h1>Add an Instructor</h1>
+
+	<table>
+		<tr>
+		<th >Email:</th>
+		<td><input type="input" id="useremail" class="textfield" placeholder="Enter Text"></input></td>
+		</tr>
+			
+		<tr >
+		<th>Password:</th>
+		<td><input type="input" id="userpassword" class="textfield" placeholder="Enter Text"></input></td>
+		</tr>
+	
+		<tr >
+		<th>First Name:</th>
+		<td><input type="input" id="Fname" class="textfield" placeholder="Enter Text"></input></td>
+		</tr>
+	
+		<tr >
+		<th>Last Name:</th>
+		<td><input type="input" id="Lname" class="textfield" placeholder="Enter Text"></input></td>
+		</tr>		
+		
+		<tr >
+		<th>Institution:</th>
+		<td><input type="" id="Institution" class="textfield" placeholder="Enter Text"></textarea></td>
+		</tr>
+		
+		<tr >
+		<th></th>
+		<td ><input type="submit" id="submitInstructor" value="Submit"/>
+		</tr>	
+
+	</table>	
+</section>	
+</body>
+
+<html>

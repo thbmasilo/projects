@@ -1,0 +1,200 @@
+/*
+	Theme Name: HTML/CSS3 Layout
+	Date: March 2015
+	Description: HTML5/CSS3 layout built on a responsive framework
+	Version: 1.0
+	Author: JSCE Team
+*/
+body
+{
+	background-image:url(../images/manual-accounting-system_61286314c3a14b79.jpg);
+	background-size: cover;
+	
+	font-size: 87.5%;
+	font-family: Arial, 'Lucida Sans Unicode';
+	line-height: 1.5;
+	text-align: left;
+}
+a {
+	text-decoration: none;
+}
+a:link, a:visited{
+	color: #CF5C3F;
+}
+a:hover, a:active{
+	background-color: #FFF;
+}
+
+.body{
+	margin: 0 auto;
+	width: 70%;
+	clear: both;	
+}
+
+.mainHeader nav {
+	background-color:#666;
+	height: 40px;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	margin: 3% 0;
+	margin-top:3%;
+}
+.mainHeader nav ul{
+	list-style: none;
+	margin: 0 auto;
+}
+.mainHeader nav ul li{
+	float: left;
+	display: inline;
+}
+.mainHeader nav a:link, .mainHeader nav a:visited {
+	color: #FFF;
+	display: inline-block;
+	padding: 10px 25px;
+	height: 20px;
+}
+.mainHeader nav a:hover, .mainHeader nav a:active, 
+.mainHeader nav a:active a:link, .mainHeader nav .active a:visited{
+	background: #CF5C3F;
+	text-shadow: none;
+}
+.mainHeader nav ul li a{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
+}
+.mainContent {
+	line-height: 1px;
+	border-radius: 0px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	/*overflow: hidden;*/
+	
+}
+
+.topcontent{
+	background-color:#FFF;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	padding: 3% 5%;
+	margin-top: -3%;
+	height: 600px;
+}
+h1{
+	text-align: center;
+	font-size: 85%;
+}
+p{
+text-align: center;
+}
+
+h5{
+	font-style: italic;
+	color: #999;
+	font-size: 85%;
+}
+.mainFooter{
+	width: 100%;
+	height: 40px;
+	float: left;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	background-color:#666;
+	margin-top: 0%;
+	
+}
+.mainFooter p{
+	width: 92%;
+	margin: 10px auto;
+	color: #FFF;
+}
+
+iframe {
+	
+	/*background-image:url(../images/manual-accounting-system_61286314c3a14b79.jpg);
+	background-size: cover;*/
+	
+}
+#my-div
+{
+    width    : 100%;
+    height   : 700px;
+    overflow : hidden;
+    position : relative;
+
+}
+ 
+#my-iframe
+{
+    position : absolute;
+    top      : 0px;
+    left     : 0px;
+    width    : 100%;
+    height   : 700px;
+}
+
+
+
+
+
+@media only screen and (min-width: 150px) and (max-width: 600px)
+{
+	.body{
+		width: 90%;	
+		font-size: 95%;
+	}
+	.mainHeader nav {	
+		height:160px;
+	}
+	.mainHeader nav ul{
+		padding-left: 0;
+	}
+	.mainHeader nav ul li{
+		width: 100%;
+		text-align: center;
+	}
+	.mainHeader nav a:link, .mainHeader nav a:visited {
+		padding: 10px 25px;
+		height: 20px;
+		display: block;
+	}
+	.content {
+		width: 100%;
+		float: left;
+		margin-top: 2%;
+	}
+	.topcontent{
+		background-color:#FFF;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		padding: 3% 5%;
+		margin-top: 2%;
+		margin-bottom: 3%;
+	}
+	#my-div
+{
+    width    : 1280px;
+    height   : 550px;
+    overflow : hidden;
+    position : relative;
+
+}
+ 
+#my-iframe
+{
+    position : absolute;
+    top      : -20px;
+    left     : -170px;
+    width    : 1280px;
+    height   : 1200px;
+}
+	
+
+}
+
+

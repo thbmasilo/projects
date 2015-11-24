@@ -1,0 +1,5 @@
+[26-Jun-2015 10:58:25 UTC] PHP Warning:  mysqli::mysqli(): (HY000/2005): Unknown MySQL server host 'http://cpanel.maganaprepaidmeter.co.za/cpsess8274709007/3rdparty/phpMyAdmin/index.php#PMAURL-2:db_st' (25) in /home/magana0/public_html/accounx/AdminPage/remoteadd.php on line 9
+[26-Jun-2015 10:58:25 UTC] PHP Warning:  mysqli_query(): Couldn't fetch mysqli in /home/magana0/public_html/accounx/AdminPage/remoteadd.php on line 19
+[26-Jun-2015 12:56:47 UTC] PHP Fatal error:  Call to a member function fetch_assoc() on a non-object in /home/magana0/public_html/accounx/AdminPage/remoteadd.php on line 14
+[26-Jun-2015 13:07:18 UTC] PHP Warning:  mysqli_query(): Empty query in /home/magana0/public_html/accounx/AdminPage/remoteadd.php on line 17
+[26-Jun-2015 13:09:40 UTC] PHP Warning:  mysqli_query(): Empty query in /home/magana0/public_html/accounx/AdminPage/remoteadd.php on line 17

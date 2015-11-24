@@ -1,0 +1,656 @@
+/*
+	Theme Name: HTML/CSS3 Layout
+	Date: March 2015
+	Description: HTML5/CSS3 layout built on a responsive framework
+	Version: 1.0
+	Author: JSCE Team
+*/
+body
+{
+	background-image:url(../images/manual-accounting-system_61286314c3a14b79.jpg);
+	background-size: cover;
+	
+	font-size: 87.5%;
+	font-family: Arial, 'Lucida Sans Unicode';
+	line-height: 1.5;
+	text-align: left;
+}
+a {
+	text-decoration: none;
+}
+a:link, a:visited{
+	color: #CF5C3F;
+}
+a:hover, a:active{
+	background-color: #FFF;
+}
+
+.body{
+	margin: 0 auto;
+	width: 70%;
+	clear: both;	
+}
+
+.mainHeader nav {
+	background-color:#666;
+	height: 40px;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	margin: 3% 0;
+	margin-top:3%;
+}
+.mainHeader nav ul{
+	list-style: none;
+	margin: 0 auto;
+}
+.mainHeader nav ul li{
+	float: left;
+	display: inline;
+}
+.mainHeader nav a:link, .mainHeader nav a:visited {
+	color: #FFF;
+	display: inline-block;
+	padding: 10px 25px;
+	height: 20px;
+}
+.mainHeader nav a:hover, .mainHeader nav a:active, 
+.mainHeader nav a:active a:link, .mainHeader nav .active a:visited{
+	background: #CF5C3F;
+	text-shadow: none;
+}
+.mainHeader nav ul li a{
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+
+}
+.mainContent {
+	line-height: 1px;
+	border-radius: 0px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	/*overflow: hidden;*/
+	
+}
+
+.topcontent{
+	background-color:#FFF;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	padding: 3% 5%;
+	margin-top: -3%;
+	height: 600px;
+}
+h1{
+	text-align: center;
+	font-size: 85%;
+}
+p{
+text-align: center;
+}
+
+h5{
+	font-style: italic;
+	color: #999;
+	font-size: 85%;
+}
+.mainFooter{
+	width: 100%;
+	height: 40px;
+	float: left;
+	border-radius: 0px;
+	-moz-border-radius: 0px;
+	-webkit-border-radius: 0px;
+	background-color:#666;
+	margin-top: 0%;
+	
+}
+.mainFooter p{
+	width: 92%;
+	margin: 10px auto;
+	color: #FFF;
+}
+
+iframe {
+	
+	/*background-image:url(../images/manual-accounting-system_61286314c3a14b79.jpg);
+	background-size: cover;*/
+	
+}
+#my-div
+{
+    width    : 100%;
+    height   : 700px;
+    overflow : hidden;
+    position : relative;
+
+}
+ 
+#my-iframe
+{
+    position : absolute;
+    top      : 0px;
+    left     : 0px;
+    width    : 100%;
+    height   : 700px;
+}
+
+
+
+
+
+@media only screen and (min-width: 150px) and (max-width: 600px)
+{
+	.body{
+		width: 90%;	
+		font-size: 95%;
+	}
+	.mainHeader nav {	
+		height:160px;
+	}
+	.mainHeader nav ul{
+		padding-left: 0;
+	}
+	.mainHeader nav ul li{
+		width: 100%;
+		text-align: center;
+	}
+	.mainHeader nav a:link, .mainHeader nav a:visited {
+		padding: 10px 25px;
+		height: 20px;
+		display: block;
+	}
+	.content {
+		width: 100%;
+		float: left;
+		margin-top: 2%;
+	}
+	.topcontent{
+		background-color:#FFF;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		padding: 3% 5%;
+		margin-top: 2%;
+		margin-bottom: 3%;
+	}
+	#my-div
+{
+    width    : 1280px;
+    height   : 550px;
+    overflow : hidden;
+    position : relative;
+
+}
+ 
+#my-iframe
+{
+    position : absolute;
+    top      : -20px;
+    left     : -170px;
+    width    : 1280px;
+    height   : 1200px;
+}
+	
+
+}
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+
+ul.sdt_menu{
+	margin:0px;
+	padding:0;
+	list-style: none;
+	font-family:"Myriad Pro", "Trebuchet MS", sans-serif;
+	/*font-size:20%;*/
+	width:100%;
+	
+}
+
+ul.sdt_menu a{
+	text-decoration:none;
+	outline:none;	
+}
+ul.sdt_menu li{
+	float:left;
+	width:170px;
+	height:85px;
+	position:relative;
+	cursor:pointer;
+}
+ul.sdt_menu li.Assets {
+	float:right;
+	width:17%;
+	height:24%;
+	position:absolute;
+	top: 18%;
+	left:24.5%;
+	background:rgba(255,255,255,0.3);
+    border-top-left-radius: 20%;
+	
+
+	
+	
+	
+}
+#Ass{
+	background-color:transparent;
+	padding:0%;	
+	font-size:1.2vw;
+	
+}
+#Lia
+{
+	background-color:transparent;
+	font-size:1.2vw;
+}
+#own
+{
+	background-color:transparent;
+	font-size:1.2vw;
+	width:50%;
+	margin-left:0px;
+	
+}
+#inco
+{
+	background-color:transparent;
+	font-size:1.2vw;
+}
+#exp
+{
+	background-color:transparent;
+	font-size:1.2vw;
+	text-wrap:suppress;
+}
+ul.sdt_menu li.Incomes{
+	float:right;
+	width:15%;
+	height:47.9%;
+	position:absolute;
+	cursor:pointer;
+	top: 18%;
+	left:61%;
+	background:rgba(255,255,255,0.4);
+	border-top-right-radius: 20%;
+	border-bottom-right-radius: 20%;
+	
+	
+	
+	
+}
+ul.sdt_menu li.Owners {
+	float:right;
+	width:14.7%;
+	height:24%;
+	position:absolute;
+	cursor:pointer;
+	top: 42%;
+	left:46.3%;
+	background:rgba(255,255,255,0.5);
+	
+		
+	
+}
+ul.sdt_menu li.Expenses {
+	float:right;
+	width:21.8%;
+	height:24%;
+	position:absolute;
+	cursor:pointer;
+	top: 42%;
+	left:24.5%;
+	border-bottom-left-radius: 20%;
+	background:rgba(255,255,255,0.6);
+	
+	
+	
+}
+ul.sdt_menu li.Liabilities {
+	float:middle;
+	width:19.5%;
+	height:24%;
+	position:absolute;
+	cursor:pointer;
+	top: 18%;
+	left:41.5%;
+	background:rgba(255,255,255,0.7);
+	
+}
+
+ul.sdt_menu li > a{
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:15%;
+	height:15%;
+	z-index:12;
+	background-color:inherit;
+	-moz-box-shadow:0px 0px 2px #000 inset;
+	-webkit-box-shadow:0px 0px 2px #000 inset;
+	box-shadow:0px 0px 0px #000 inset;
+	
+	
+}
+ul.sdt_menu li a img{
+	border:none;
+	position:absolute;
+	width:0px;
+	height:0px;
+	bottom:0px;
+	left:85px;
+	z-index:100;
+	-moz-box-shadow:0px 0px 4px #000;
+	-webkit-box-shadow:0px 0px 4px #000;
+	box-shadow:0px 0px 4px #000;
+	border-radius:20%;
+	
+}
+ul.sdt_menu li span.sdt_wrap{
+	position:absolute;
+	top:25px;
+	left:0px;
+	width:100%;
+	height:50%;
+	z-index:15;
+	
+}
+ul.sdt_menu li span.sdt_active{
+	position:absolute;
+	background:#FF9966;
+	top:85px;
+	width:170px;
+	height:0px;
+	left:0px;
+	z-index:14;
+	-moz-box-shadow:0px 0px 4px #000 inset;
+	-webkit-box-shadow:0px 0px 4px #000 inset;
+	box-shadow:0px 0px 4px #000 inset;
+	border-radius:20%;
+	
+}
+ul.sdt_menu li span span.sdt_link,
+ul.sdt_menu li span span.sdt_descr,
+ul.sdt_menu li div.sdt_box a{
+	margin-left:30px;
+	text-transform:uppercase;
+	text-shadow:1px 1px 1px #000;
+	
+	
+}
+h5{
+/*line-height: 25px;*/
+background:rgba(255,255,255,0.5);
+margin:0px;
+padding-top:0px;
+text-align: center;
+color:#FFF;
+text-shadow:1px 1px 1px #000;
+font-size:1vw;
+}
+
+ul.sdt_menu li span span.sdt_link,
+ul.sdt_menu li span span.sdt_descr,
+ul.sdt_menu li div.sdt_box2 a{
+	margin-left:0px;
+	text-transform:uppercase;
+	text-shadow:1px 1px 1px #000;
+	text-align:center;
+	
+	
+	
+	
+	
+}
+ul.sdt_menu li span span.sdt_link,
+ul.sdt_menu li span span.sdt_descr,
+ul.sdt_menu li div.sdt_box3 a{
+	margin-left:30px;
+	text-transform:uppercase;
+	text-shadow:1px 1px 1px #000;
+	
+	
+	
+}
+
+ul.sdt_menu li span span.sdt_link{
+	color:#fff;
+	/*font-size:150%;*/
+	float:left;
+	clear:both;
+	width:50%;
+	margin-left:3%;
+	
+	
+	
+}
+ul.sdt_menu li span span.sdt_descr{
+	color:#FFFFFF;
+	float:left;
+	clear:both;
+	width:50%; 
+	font-size:0.7vw;
+	letter-spacing:1px;
+	margin-left:2%;
+	
+}
+ul.sdt_menu li div.sdt_box{
+	display:block;
+	position:absolute;
+	width:170px;
+	overflow:hidden;
+	height:170px;
+	top:85px;
+	left:0px;
+	display:none;
+	background:#FFFFFF;
+	box-shadow:0px 0px 2px #000 inset;
+	border-radius:20%;
+	line-height: 80%;
+	background:rgba(255,255,255,0.3);
+	
+	
+}
+ul.sdt_menu li div.sdt_box a{
+	float:left;
+	clear:both;
+	line-height:15px;
+	color:#CCCCCC;
+	display:block;
+	width:100%;
+	margin-left:0px;
+	text-align:center;
+	font-size:1vw;
+	
+	
+}
+#Income1
+{
+	
+	line-height:7px;
+	
+}
+
+ul.sdt_menu li div.sdt_box a:first-child{
+	margin-top:5px;
+}
+ul.sdt_menu li div.sdt_box a:hover{
+	color:#fff;
+}
+ul.sdt_menu li div.sdt_box2{
+	display:block;
+	position:absolute;
+	width:170px;
+	overflow:hidden;
+	height:170px;
+	top:255px;
+	left:0px;
+	display:none;
+	background:#FFFFFF;
+	box-shadow:0px 0px 2px #000 inset;
+	border-radius:20%;
+	background:rgba(255,255,255,0.3);
+}
+ul.sdt_menu li div.sdt_box2 a{
+	float:left;
+	clear:both;
+	line-height:15px;
+	color:#CCCCCC;
+	padding:7px 0px 0;
+	width: inherit;
+	display:block;
+	width:100%;
+	margin-left:0px;
+	text-align:center;
+	font-size:1vw; 
+	
+	
+	
+}
+ul.sdt_menu li div.sdt_box2 a:first-child{
+	margin-top:15px;
+}
+ul.sdt_menu li div.sdt_box2 a:hover{
+	color:#fff;
+}
+ul.sdt_menu li div.sdt_box3{
+	display:block;
+	position:absolute;
+	width:170px;
+	overflow:hidden;
+	height:170px;
+	top:85px;
+	left:170px;
+	display:none;
+	background:#FFFFFF;
+	box-shadow:0px 0px 2px #000 inset;
+	border-radius:20%;
+	background:rgba(255,255,255,0.3);
+}
+ul.sdt_menu li div.sdt_box3 a{
+	float:left;
+	clear:both;
+	line-height:15px;
+	color:#CCCCCC;
+	display:block;
+	width:100%;
+	margin-left:0px;
+	text-align:center;
+	font-size:1vw;
+}
+ul.sdt_menu li div.sdt_box3 a:first-child{
+	margin-top:15px;
+}
+ul.sdt_menu li div.sdt_box3 a:hover{
+	color:#fff;
+}
+@media only screen and (min-width: 350px) and (max-width: 600px)
+{
+	ul.sdt_menu li.Assets {
+	float:right;
+	width:50%;
+	height:24px;
+	position:absolute;
+	top: 18%;
+	left:24.5%;
+	background:rgba(255,255,255,0.3);
+}
+ul.sdt_menu li.Incomes{
+	float:right;
+	width:15%;
+	height:47.5%;
+	position:absolute;
+	cursor:pointer;
+	top: 18%;
+	left:61.2%;
+	background:rgba(255,255,255,0.4);
+}
+ul.sdt_menu li.Owners {
+	float:right;
+	width:11%;
+	height:24%;
+	position:absolute;
+	cursor:pointer;
+	top: 42%;
+	left:46.3%;
+	background:rgba(255,255,255,0.5);
+	
+}
+ul.sdt_menu li.Expenses {
+	float:right;
+	width:18%;
+	height:24%;
+	position:absolute;
+	cursor:pointer;
+	top: 42%;
+	left:24.5%;
+	background:rgba(255,255,255,0.6);
+	
+}
+ul.sdt_menu li.Liabilities {
+	float:middle;
+	width:19.5%;
+	height:24%;
+	position:absolute;
+	cursor:pointer;
+	top: 18%;
+	left:41.5%;
+	background:rgba(255,255,255,0.7);
+}
+
+ul.sdt_menu li div.sdt_box{
+	display:block;
+	position:absolute;
+	width:70px;
+	overflow:hidden;
+	height:70px;
+	top:85px;
+	left:0px;
+	display:none;
+	background:#FFFFFF;
+	box-shadow:0px 0px 2px #000 inset;
+	border-radius:20%;
+	line-height: 80%;
+	
+	
+}
+ul.sdt_menu li div.sdt_box2{
+	display:block;
+	position:absolute;
+	width:70px;
+	overflow:hidden;
+	height:70px;
+	top:255px;
+	left:0px;
+	display:none;
+	background:#FFFFFF;
+	box-shadow:0px 0px 2px #000 inset;
+	border-radius:20%;
+	background:rgba(255,255,255,0.3);
+}
+#Ass{
+	border-top-left-radius:80%;
+	
+	
+}
+#own
+{
+	background-color:transparent;
+	font-size:50%;
+	width:50%;
+	overflow:inherit;
+	margin-left:0px;
+	
+}
+}

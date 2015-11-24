@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="boot.css" type="text/css" media="screen"/>
+
+
+
+<style>
+h2
+{
+color:white;
+text-align:center;
+margin-bottom:10px;
+font-size:18px;
+font-family: "Comic Sans MS", Times, serif;
+text-shadow: 1px 1px 1px #000;
+
+}
+
+h1
+{
+color:white;
+text-align:center;
+margin-top: 20px;
+margin-bottom:30px;
+font-family: "Comic Sans MS", Times, serif;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+#container
+{
+
+  border-radius: 12px 54px 5px 54px;
+  -moz-border-radius: 12px 54px 5px 54px;
+  -webkit-border-radius: 12px 54px 5px 54px;
+border: 0px solid #424142;
+color:white;
+	background: rgba(0,0,0,0.3); 
+  margin-left: 15%;
+width:65%;
+padding-bottom:40px;
+padding-top:30px;
+text-shadow: 1px 1px 1px #000;
+}
+
+
+#border-radius
+{
+
+  border-radius: 12px 54px 5px 54px;
+  -moz-border-radius: 12px 54px 5px 54px;
+  -webkit-border-radius: 12px 54px 5px 54px;
+  border: 1px solid rgba(255,255,255,0.9);
+   margin-left: 20%;
+margin-bottom:20px;
+margin-top:10px;
+text-shadow: 1px 1px 1px #000;
+  background: rgba(0,0,0,0.5);
+font-family: "Comic Sans MS", Times, serif;
+  width:70%;
+
+
+}
+#ans1 th
+{
+  background: rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 1px #000;
+  font-family: "Comic Sans MS", Times, serif;
+
+}
+
+
+
+
+
+
+.demo-info {
+	padding: 14px 26px;
+	font-size: 14px;
+	line-height: 100%;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+	color: #fff;
+	
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background 0.1s ease-in-out;
+	-webkit-transition: background 0.1s ease-in-out;
+	-moz-transition: background 0.1s ease-in-out;
+	-ms-transition: background 0.1s ease-in-out;
+	-o-transition: background 0.1s ease-in-out;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	color: #fff;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+.demo-info:active {
+	padding-top: 15px;
+}
+.demo-info, .demo-info:hover, .demo-info:active {
+	outline: 0 none;
+	text-decoration: none;
+        color: #fff;
+}
+.demo-info-1 {
+	background-color: #fdc058;
+	box-shadow: 0px 3px 0px 0px #e29003;
+	float :right;
+	margin-top:1%;
+	margin-right :10%;
+}
+.demo-info-1:hover {
+	background-color: #fdb53a;
+}
+.demo-info-1:active {
+	box-shadow: 0px 1px 0px 0px #e29003;
+}
+
+
+
+
+.demo-info-2 {
+	background-color: #fdc058;
+	box-shadow: 0px 3px 0px 0px #e29003;
+	float :left;
+	margin-top:1%;
+	margin-left :5%;
+}
+.demo-info-2`:hover {
+	background-color: #fdb53a;
+}
+.demo-info-2:active {
+	box-shadow: 0px 1px 0px 0px #e29003;
+}
+
+</style>
+
+<script>
+function ShowAcooount()
+{
+
+var table = document.getElementById("ans1");
+
+table.rows[1].cells[1].innerHTML =localStorage.getItem("Entity1");
+
+table.rows[1].cells[2].innerHTML =localStorage.getItem("Account1");
+table.rows[1].cells[3].innerHTML =localStorage.getItem("AccStatus1");
+table.rows[1].cells[4].innerHTML =localStorage.getItem("DRCR1");
+
+
+
+table.rows[2].cells[1].innerHTML =localStorage.getItem("Entity2");
+table.rows[2].cells[2].innerHTML =localStorage.getItem("Account2");
+table.rows[2].cells[3].innerHTML =localStorage.getItem("AccStatus2");
+table.rows[2].cells[4].innerHTML =localStorage.getItem("DR_CR2");
+
+
+
+}
+function PassingToSlider()
+		{
+	
+           sessionStorage.setItem('Account1', localStorage.getItem("Account1"));    
+           sessionStorage.setItem('AccStatus1', localStorage.getItem("AccStatus1"));  
+		   sessionStorage.setItem('DRCR1',localStorage.getItem("DRCR1")); 
+		   
+		   sessionStorage.setItem('Account2', localStorage.getItem("Account2")); 
+		   sessionStorage.setItem('AccStatus2', localStorage.getItem("AccStatus2"));  
+		   sessionStorage.setItem('DR_CR2', localStorage.getItem("DR_CR2"));  
+
+		}
+
+function CloseAcooount()
+{
+
+var h = 1;
+localStorage.setItem("finish",h);
+
+var isInIFrame = (window.location != window.parent.location);
+if(isInIFrame==true){
+
+  window.location.href = "newboard.html";  
+}
+else {
+   window.location.href = "bootstrap-slider.php#my-div";
+}
+
+}
+
+
+</script>
+<body onload ="ShowAcooount();" >
+<div  id="container" style="margin-top:100px;">
+
+<h1 id="mrg">
+     <strong > Overall Summary</strong>
+  </h1>
+
+
+
+</br>
+
+
+<div id="border-radius">
+  <h2>
+       Selections and answers from the board and slider
+    </h2>
+</div>
+
+<table   class="table" id="ans1">
+ <tr>
+  <th>Number</th>
+  <th>Entity</th>
+   <th>Account</th>
+    <th>Entity Status</th>
+   <th>DR or CR</th>
+
+ </tr>
+ <tr>
+  <td>1</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+
+ </tr>
+  <tr>
+  <td>2</td>
+  <td></td>
+  <td></td>
+  <td></td>
+  <td></td>
+   </tr>
+</table>
+
+
+
+</div>
+ <a  href="slider.html" onclick="PassingToSlider();" class="demo-info demo-info-2" >PREVIOUS</a>
+<a  href="#"    class="demo-info demo-info-1" onclick="CloseAcooount();">FINISH</a>
+</body>
+</html>

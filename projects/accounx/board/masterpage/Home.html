@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>CashCow Accounting Tool</title>
+    
+	 <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+	  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	  <meta name="viewport" content="width=device=width, initial=scale=1.0">
+	  <meta name="keywords" content="jquery, css3, sliding, box, menu, cube, navigation, portfolio, thumbnails"/>
+	  
+			<link rel="stylesheet" href="css/style.css" type="text/css" media="screen"/>
+	        <style>
+			body{
+				background:#FFFFF url(bg.jpg) repeat top left;
+				font-family:Arial;
+			}
+			span.reference{
+				position:fixed;
+				left:10px;
+				bottom:10px;
+				font-size:12px;
+			}
+			span.reference a{
+				color:#aaa;
+				text-transform:uppercase;
+				text-decoration:none;
+				text-shadow:1px 1px 1px #000;
+				margin-right:30px;
+			}
+			span.reference a:hover{
+				color:#ddd;
+			}
+			ul.sdt_menu{
+				margin-top:50px;
+			}
+			h1.title{
+				text-indent:-9000px;
+				background:transparent url(title.png) no-repeat top left;
+				width:633px;
+				height:69px;
+			}
+		</style>
+	  
+		
+</head>
+<body>
+
+<div class="content">
+			<h1 class="title">Slide Down Box Menu with jQuery and CSS3</h1>
+			<ul id="sdt_menu" class="sdt_menu">
+			
+				<li class="Assets"<li class="Assets" onClick="AssetsShow()" id="Assets">
+					<a href="#">
+						<img  src="images/1.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">ASSETS</span>
+							<span class="sdt_descr">(Owns)</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+					<h5>Current Assets<br>(Short Term)<hr></h5>
+							<a href="#">TRADING STOCK</a>
+							<a href="#">DEBITORS-CONTROL</a>
+							<a href="#">BANK<br>(DEBIT)<br>BALANCE</a>
+							<a href="#">CASH FLOAT</a>
+					</div>
+					<div class="sdt_box2">
+					  <h5>Non-Current Assets<br>(Long Term)<hr>Financial Assets</h5><br>
+							<a href="#">FIXED DEPOSIT</a><br>
+							<h5><hr>Fixed/Tangible Assets</h5>
+							<a href="#">LAND & BUILDINGS</a>
+							<a href="#">VEHICLES</a>
+						    <a href="#">EQUIPMENT</a><br>	
+					</div>
+				</li>
+				<li class="Liabilities" onClick="LiabilitiesShow()" id="Liabilities">
+					<a href="#">
+						<img  src="images/2.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">LIABILITIES</span>
+							<span class="sdt_descr">(Owes)</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+					  <h5>Current liabilities<br>(LongTerm)<hr></h5>
+							<a href="#">CREDITORS CONTROL</a>
+							<a href="#">BANK<br>(CREDIT BALANCE OVERDRAFT)</a>
+							<a href="#">SHORT TERM LOAN</a>
+					</div>
+					<div class="sdt_box2">
+					  <h5>Non Current liabilities<br>(LongTerm)<hr></h5>
+							<a href="#">MORTGAGE</a>
+							<a href="#">LONG TERM LOAN</a>
+					</div>
+				</li>
+				<li class="Owners" onClick="ownerShow()" id="Owners">
+					<a href="#">
+						<img src="images/4.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">OWNER EQUITY</span>
+							<span class="sdt_descr">(Wealth of the owner)</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+							<a href="#">CAPITAL</a>
+							<a href="#">DRAWINGS</a>
+					</div>
+					
+					
+				</li>
+				<li class="Incomes" onClick="IncomeShow()" id="Incomes">
+					<a href="#">
+						<img src="images/5.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">INCOME</span>
+							<span class="sdt_descr">(Receipt)</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+					    <h5>Training Business<hr>Main Income</h5><br>
+						<a href="#">SALES</a><br><br>
+						<h5>Other Income<hr></h5><br>
+						<a href="#">RENT INCOME</a>
+					</div>
+					<div class="sdt_box2">
+					    <h5>Service Business<hr>Main/Current Income</h5><br>
+						<a href="#">SERVICES RENDERED</a>
+						<a href="#">COMMISSION INCOME</a><br><br><br>
+						<h5>Other Income<hr></h5><br>
+						<a href="#">RENT INCOME</a>
+					</div>
+				</li>
+				<li class="Expenses" onClick="ExpensesShow()" id="Expenses">
+					<a href="#">
+						<img src="images/3.jpg" alt=""/>
+						<span class="sdt_active"></span>
+						<span class="sdt_wrap">
+							<span class="sdt_link">EXPENSE</span>
+							<span class="sdt_descr">(Running costs)</span>
+						</span>
+					</a>
+					<div class="sdt_box">
+						<a href="#">MATERIAL COSTS</a>
+						<a href="#">DEBITORS-ALLOWANCES</a>
+						<a href="#">WATER & ELECTRICITY</a>
+						<a href="#">WAGES & SALARIES</a>
+						<a href="#">COST OF SALES</a>
+					</div> 
+					<div class="sdt_box2">
+							<a href="#">RENT EXPENSE</a>
+							<a href="#">ADVERSTISING</a>
+							<a href="#">FUEL</a>
+						    <a href="#">REPAIRS</a>									
+					</div>
+					<div class="sdt_box3">
+					    <a href="#">PARKING MATERIAL</a>
+						<a href="#">STATIONARY</a>
+						<a href="#">INSURANCE</a>
+	       				<a href="#">TRADING LICENSE</a>
+						<a href="#">TELEPHONE</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+        <div>
+            <span class="reference">
+                <a href="http://tympanus.net/codrops/2010/07/16/slide-down-box-menu/">back to the Codrops Tutorial</a>
+				<a href="http://www.flickr.com/photos/arcticpuppy/sets/72157622090180990/">Images by tibchris</a>
+            </span>
+		</div>
+		
+		<!-- The JavaScript -->
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+		<script type="text/javascript" src="jquery/jquery.easing.1.3.js"></script>
+        <script type="text/javascript">
+            $(function() {
+				/**
+				* for each menu element, on mouseenter, 
+				* we enlarge the image, and show both sdt_active span and 
+				* sdt_wrap span. If the element has a sub menu (sdt_box),
+				* then we slide it - if the element is the last one in the menu
+				* we slide it to the left, otherwise to the right
+				*/
+                $('#sdt_menu > li').bind('click',function(){
+					var $elem = $(this);
+					$elem.find('img')
+						 .stop(true)
+						 .animate({
+							'width':'170px',
+							'height':'170px',
+							'left':'0px'
+						 },400,'easeOutBack')
+						 .andSelf()
+						 .find('.sdt_wrap')
+					     .stop(true)
+						 .animate({'top':'140px'},500,'easeOutBack')
+						 .andSelf()
+						 .find('.sdt_active')
+					     .stop(true)
+						 .animate({'height':'170px'},300,function(){
+						var $sub_menu = $elem.find('.sdt_box');
+						if($sub_menu.length){
+							var left = '170px';
+							if($elem.parent().children().length == $elem.index()+1)
+								left = '-170px';
+							$sub_menu.show().animate({'left':left},200);
+						}	
+						var $sub_menu2 = $elem.find('.sdt_box2');
+						
+						if($sub_menu2.length){
+							var bottom = '270px';
+							if($elem.parent().children().length == $elem.index()+1)
+								bottom = '-270px';
+							$sub_menu2.show().animate({'bottom':bottom},200);
+						}	
+						
+						var $sub_menu3 = $elem.find('.sdt_box3');
+						
+						if($sub_menu3.length){
+							var right = '270px';
+							if($elem.parent().children().length == $elem.index()+1)
+								right = '-270px';
+							$sub_menu3.show().animate({'right':right},200);
+						}	
+					});
+				}).bind('mouseleave',function(){
+					var $elem = $(this);
+					var $sub_menu = $elem.find('.sdt_box');
+					if($sub_menu.length)
+						$sub_menu.hide().css('left','0px');
+						
+					var $sub_menu2 = $elem.find('.sdt_box2');
+					if($sub_menu2.length)
+					$sub_menu2.hide().css('left','0px');
+						
+					var $sub_menu3 = $elem.find('.sdt_box3');
+					if($sub_menu3.length)
+					$sub_menu3.hide().css('left','170px');
+						
+						
+					
+					$elem.find('.sdt_active')
+						 .stop(true)
+						 .animate({'height':'0px'},300)
+						 .andSelf().find('img')
+						 .stop(true)
+						 .animate({
+							'width':'0px',
+							'height':'0px',
+							'left':'85px'},400)
+						 .andSelf()
+						 .find('.sdt_wrap')
+						 .stop(true)
+						 .animate({'top':'25px'},500);
+				});
+            });
+			
+			
+			
+        </script>
+		<script language="javascript">
+function AssetsShow() {
+
+        $(".Owners").hide();
+		$(".Expenses").hide();
+		$(".Liabilities").hide();
+		$(".Incomes").hide();
+		document.getElementById("Assets").style.background = "white";   
+}
+
+function ExpensesShow() {
+	     
+        $(".Assets").hide();
+		$(".Owners").hide();
+		$(".Liabilities").hide();
+		$(".Incomes").hide();
+		document.getElementById("Expenses").style.background = "white";
+}
+
+function LiabilitiesShow() {
+
+        $(".Assets").hide();
+		$(".Owners").hide();
+		$(".Expenses").hide();
+		$(".Incomes").hide();
+		 document.getElementById("Liabilities").style.background = "white";
+}
+
+function IncomeShow()
+{
+
+        $(".Assets").hide();
+		$(".Owners").hide();
+		$(".Expenses").hide();
+		$(".Liabilities").hide();
+		 document.getElementById("Incomes").style.background = "white";
+}
+
+function ownerShow()
+{
+        $(".Assets").hide();
+		$(".Expenses").hide();
+		$(".Liabilities").hide();
+		$(".Incomes").hide();
+		document.getElementById("Owners").style.background = "white";
+}
+
+//unhide
+
+        $(document).ready(function(){
+    $(".Assets").mouseleave(function(){
+        $(".Owners").show();
+		$(".Expenses").show();
+		$(".Liabilities").show();
+		$(".Incomes").show();
+		document.getElementById("Assets").style.background = "#6FC";
+    });
+		});
+		 
+$(document).ready(function(){
+    $(".Owners").mouseleave(function(){
+        $(".Assets").show();
+		$(".Expenses").show();
+		$(".Liabilities").show();
+		$(".Incomes").show();
+		document.getElementById("Owners").style.background = "#0FF";
+    });
+		});
+$(document).ready(function(){
+    $(".Expenses").mouseleave(function(){
+        $(".Owners").show();
+		$(".Assets").show();
+		$(".Liabilities").show();
+		$(".Incomes").show();
+		document.getElementById("Expenses").style.background = "#C6C";
+    });
+		});
+function ownerHide() {
+
+        $(".Assets").show();
+		$(".Expenses").show();
+		$(".Liabilities").show();
+		$(".Incomes").show();
+		$(".Owners").show();
+		document.getElementById("Assets").style.background = "#0FF";
+}
+
+ $(document).ready(function(){
+    $(".Liabilities").mouseleave(function(){
+        $(".Owners").show();
+		$(".Expenses").show();
+		$(".Assets").show();
+		$(".Incomes").show();
+		document.getElementById("Liabilities").style.background = "#FF9966";
+    });
+		});
+		
+		
+$(document).ready(function(){
+    $(".Owners").mouseleave(function(){
+        $(".Liabilities").show();
+		$(".Expenses").show();
+		$(".Assets").show();
+		$(".Incomes").show();
+		document.getElementById("Owners").style.background = "#F3C";
+    });
+		});
+		
+$(document).ready(function(){
+    $(".Incomes").mouseleave(function(){
+        $(".Liabilities").show();
+		$(".Expenses").show();
+		$(".Assets").show();
+		$(".Owners").show();
+		document.getElementById("Incomes").style.background = "#0FF";
+    });
+		});
+</script>
+</body>
+</html>

@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="boot.css">
+  	<script src="popup/dist/sweetalert-dev.js"></script>
+    <link rel="stylesheet" href="popup/dist/sweetalert.css">
+	
+	
+	
+<style>
+
+.jumbotron {
+  width: 40%;
+  height: 70%;
+  display: inline-block;
+}
+.jumbotron h1,
+.jumbotron .h1 {
+  color: inherit;
+}
+.jumbotron p {
+  margin-bottom: auto;
+  font-size: 120%;
+  font-weight: 100;
+   margin-top: auto;
+}
+.jumbotron > hr {
+  border-top-color: #e8decd;
+}
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 6px;
+}
+.jumbotron .container {
+  max-width: 100%;
+}
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding: 48px 0;
+  }
+  .container .jumbotron,
+  .container-fluid .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+  .jumbotron h1,
+  .jumbotron .h1 {
+    font-size: 63px;
+  }
+}
+
+.ribbon {
+ font-size: 16px !important;
+ /* This ribbon is based on a 16px font side and a 24px vertical rhythm. I've used em's to position each element for scalability. If you want to use a different font size you may have to play with the position of the ribbon elements */
+
+ width: 55%;
+
+ position: relative;
+ background: #ba89b6;
+ color: #fff;
+ text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+ font-weight: bold;
+ 
+ text-align: center;
+ padding: 1em 2em; /* Adjust to suit */
+ margin: 2em auto 3em; /* Based on 24px vertical rhythm. 48px bottom margin - normally 24 but the ribbon 'graphics' take up 24px themselves so we double it. */
+ margin-top :20px;
+ margin-left :300px;
+}
+.ribbon:before, .ribbon:after {
+ content: "";
+ position: absolute;
+ display: block;
+ bottom: -1em;
+ border: 1.5em solid #986794;
+
+ z-index: -1;
+
+}
+.ribbon:before {
+ left: -2em;
+ border-right-width: 1.5em;
+ border-left-color: transparent;
+}
+.ribbon:after {
+ right: -2em;
+ border-left-width: 1.5em;
+ border-right-color: transparent;
+}
+.ribbon .ribbon-content:before, .ribbon .ribbon-content:after {
+ content: "";
+ position: absolute;
+ display: block;
+
+ border-style: solid;
+ border-color: #804f7c transparent transparent transparent;
+ bottom: -1em;
+
+}
+.ribbon .ribbon-content:before {
+ left: 0;
+ border-width: 1em 0 0 1em;
+}
+.ribbon .ribbon-content:after {
+ right: 0;
+ border-width: 1em 1em 0 0;
+}
+
+
+
+
+
+
+#question{
+background-color:#BDB76B;
+ width:70%;
+ height:60px;
+margin-top:120px;
+margin-right:120px;
+margin-left:200px;
+margin-bottom:30px;
+ border-radius: 7px;
+ padding-top:1px;
+}
+#Container{
+  display:inline;
+background-color:#FFFFFF;
+ width:40%;
+ height:390px;
+margin-right:120px;
+margin-left:200px;
+margin-bottom:120px;
+ border-radius: 7px;
+}
+.flip3D{  width: 400px;
+height: 350px;
+margin-left: 10px;
+margin-right: auto;
+display: inline-block;
+}
+.flip3D > .front{
+	position:absolute;
+	-webkit-transform: perspective( 600px ) rotateY( 0deg );
+	transform: perspective( 600px ) rotateY( 0deg );
+	background: none repeat scroll 0% 0% rgba(255, 255, 102, 0.5); width: 400px;
+    height: 260px;border-radius: 7px;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transition: -webkit-transform .5s linear 0s;
+	transition: transform .5s linear 0s;
+}
+.flip3D > .front{
+text-align :center;
+color :purple;
+}
+.flip3D >
+{
+text-align :center;
+color :red;
+}
+.flip3D > .front img{
+width :250px;
+height:200px;
+}
+.flip3D > .back{
+	position:absolute;
+	-webkit-transform: perspective( 600px ) rotateY( 180deg );
+	transform: perspective( 600px ) rotateY( 180deg );
+	background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.5); width: 400px;
+    height: 260px; border-radius: 7px;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	transition: -webkit-transform .5s linear 0s;
+	transition: transform .5s linear 0s;
+}
+.flip3D:hover> .front{
+	-webkit-transform: perspective( 600px ) rotateY( -180deg );
+	transform: perspective( 600px ) rotateY( -180deg );
+}
+
+#H1 {
+    font-size: 250%;
+	 color:#248F24;
+}
+#h3BackIn
+{
+ color:#2E8B57;
+}
+#h3BackDe
+{
+ color:#8A0000;
+}
+
+.flip3D:hover > .back{
+	-webkit-transform: perspective( 600px ) rotateY( 0deg );
+	transform: perspective( 600px ) rotateY( 0deg );
+}
+.logo{
+ width:240px; height:200px; border-radius: 7px;
+}
+
+h3
+{
+color:#CCEBEB;
+text-align:center;
+margin-bottom:10px;
+
+}
+
+
+
+
+
+   #ans
+{
+
+	border: #ba89b6 solid 3px;
+	width:50%;
+	height: auto;
+	margin-left:330px;
+	text-align:center;
+	margin-top: -37px;
+	text-shadow: 1px 1px 1px #000;
+	background: rgba(0,0,0,0.3);
+    color:white;
+
+
+}
+#ans th
+
+{
+  background-color: #ba89b6;
+  text-shadow: 1px 1px 1px #000;
+  color:white;
+}
+
+.edit{
+	 background-color:  #fdc058; !important;
+	 border-color:  #fdc058; !important;
+	 border-radius: 25px;
+     color: #fff;
+	 font-weight: bold;
+	 text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+}
+
+.edit:hover
+{
+  border-style: solid;
+  background-color:  #fdb53a!important;
+  
+}
+
+/*
+    Name:           ph-buttons
+    Description: 	Pixcil Hub Buttons
+    Author: 		   Pixcils®
+    Version: 	  	1.0
+*/
+
+/*Main button class
+==========================*/
+.ph-button {
+
+    border-width:3px;
+    color: #FFFFFF;
+	text-shadow: 1px 1px 1px #000;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-block;
+
+
+    overflow: hidden;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all 200ms ease-in-out 0s;
+    white-space: nowrap;
+    font-weight: 700;
+	padding :10px;
+    font-size: 15px;
+
+}
+/*Green
+==========================*/
+.ph-btn-green {
+
+    border-color: #3AC162;
+	background-color: #5FCF80;
+
+}
+.ph-btn-green:hover, .ph-btn-green:focus, .ph-btn-green:active {
+    background-color: #4BC970;
+    border-color: #3AC162;
+    background: 	#5C993D;
+    transition: background 0.3s linear 0s, color 0.3s linear 0s;
+}
+
+/*Blue
+==========================*/
+.ph-btn-blue {
+    border-color: #326E99;
+    background-color: #3F8ABF;
+}
+
+.ph-btn-blue:hover, .ph-btn-blue:focus, .ph-btn-blue:active {
+    background-color: #397CAC;
+    border-color: #326E99;
+}
+
+/*Grey
+==========================*/
+.ph-btn-grey {
+	 width :90%;
+	 margin-top :57.5px;
+	 margin-bottom:10px;
+
+
+}
+.ph-btn-grey:hover, .ph-btn-grey:focus, .ph-btn-grey:active {
+border-style: solid;
+  color:#EA4343;
+
+}
+
+.ph-button ph-btn-greyEI
+{
+ margin-top :0px;
+ color:#5FCF80;
+}
+.ph-btn-greyEI:hover
+{
+border-style: solid;
+ color:#5FCF80;
+}
+
+.ph-button ph-btn-greyAI
+{
+ margin-top :0px;
+ color:#5FCF80;
+
+
+}
+.ph-btn-greyAI:hover
+{
+border-style: solid;
+ color:#5FCF80;
+}
+.Bh1{
+font-size:250%;
+ color:#5FCF80;
+ text-align :center;
+ margin-top:100px;
+}
+
+.ph-button ph-btn-greyE
+{
+ margin-top :0px;
+ color:#5FCF80;
+}
+.ph-btn-greyE:hover
+{
+border-style: solid;
+ color:#EA4343;
+}
+
+.ph-button ph-btn-greyA
+{
+border-style: solid;
+ margin-top :0px;
+ color:#5FCF80;
+
+
+}
+.ph-btn-greyA:hover
+{
+border-style: solid;
+ color:#EA4343;
+}
+
+/*Red
+==========================*/
+.ph-btn-red {
+
+    background-color: #ED5A5A !important;
+    border-color: #EA4343 !important;
+
+}
+.ph-btn-red:hover, .ph-btn-red:focus, .ph-btn-red:active {
+    border-style: solid;
+    background: none repeat scroll 0 0 #990000 !important;
+    border-color: #E83131 !important;
+   transition: background 0.3s linear 0s, color 0.3s linear 0s;
+}
+
+
+/*DEMO ONLY FOR CENTER POSITION*/
+.ph-container {
+
+  margin: 0 auto;
+  display: inline;
+
+
+}
+
+.ph-float {
+  margin-top :50px;
+  margin-left :110px;
+  width: 22%;
+  padding: 10px;
+  padding-top: 50px;
+
+}
+
+.ph-clear {
+
+  clear: both;
+
+}
+
+/*Cow image*/
+.flip3D > .front img {
+    width: 150px;
+    height: 100px;
+}
+
+.ph-btn-grey1 {
+	 width :90%;
+	 margin-top :57.5px;
+	 margin-bottom:10px;
+
+}
+.ph-btn-grey1:hover, .ph-btn-grey1:focus, .ph-btn-grey1:active {
+border-style: solid;
+  color:#5FCF80;
+
+}
+
+.topleft{
+  width: 40%;
+  height: 45px;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.topright{
+    width: 40%;
+    height: 45px;
+    float: right;
+    margin-right: 2px;
+    text-align: center;
+    margin-top: 10px;
+}
+.bottomleft{
+    height: 45px;
+    float: left;
+    margin-left: 10px;
+    width: 200px;
+    margin-top: -37px;
+}
+.bottomright{
+  width: 40%;
+  height: 45px;
+  float: right;
+  margin-top: -37px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+#ID
+{
+ margin-left: 15px;
+}
+#II
+{
+ margin-left: 17px;
+}
+.cowImg
+{
+  width:450px;
+  height:150px;
+  border-width:3px;
+  border-radius: 6px;
+}
+
+
+.demo-info {
+	padding: 14px 26px;
+	font-size: 14px;
+	line-height: 100%;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.4);
+	color: #fff;
+	
+	vertical-align: middle;
+	text-align: center;
+	cursor: pointer;
+	font-weight: bold;
+	transition: background 0.1s ease-in-out;
+	-webkit-transition: background 0.1s ease-in-out;
+	-moz-transition: background 0.1s ease-in-out;
+	-ms-transition: background 0.1s ease-in-out;
+	-o-transition: background 0.1s ease-in-out;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	color: #fff;
+	-webkit-border-radius: 40px;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+.demo-info:active {
+	padding-top: 15px;
+}
+.demo-info, .demo-info:hover, .demo-info:active {
+	outline: 0 none;
+	text-decoration: none;
+        color: #fff;
+}
+.demo-info-1 {
+	background-color: #fdc058;
+	box-shadow: 0px 3px 0px 0px #e29003;
+	float :right;
+	margin-top:0%;
+}
+.demo-info-1:hover {
+	background-color: #fdb53a;
+}
+.demo-info-1:active {
+	box-shadow: 0px 1px 0px 0px #e29003;
+}
+
+
+
+
+.demo-info-2 {
+	background-color: #fdc058;
+	box-shadow: 0px 3px 0px 0px #e29003;
+	float :left;
+	margin-top:0%;
+}
+.demo-info-2`:hover {
+	background-color: #fdb53a;
+}
+.demo-info-2:active {
+	box-shadow: 0px 1px 0px 0px #e29003;
+}
+.btnSlider
+{
+text-decoration :underline;
+color:blue;
+}
+
+</style>
+</head>
+<body onload ="Account()">
+
+
+
+  <h1 id="mrg" class="ribbon">
+
+
+     <strong class="ribbon-content">Select the appropriate status for the entity <lable id="lblAccount"><font color="black" > </font></lable> to determine if its a debit of credit.</strong>
+
+
+
+  </h1>
+
+
+
+
+<table cellpadding="4" style="border-collapse: collapse;" id="ans">
+ <tr>
+   <th style="padding-left: 5%;">ACCOUNT</th>
+    <th style="padding-left: 12%;">ENTITY STATUS</th>
+   <th style="padding-left: 5%;">DR or CR</th>
+ <th style="padding-left: 6%;">CORRECTION</th>
+ </tr>
+
+</table>
+<div style="margin-left: auto;margin-right: auto;margin-top:20px;width: 830px;">
+<div>
+
+<div class="flip3D">
+  <div class="back">
+
+   <div type="button"  onclick="myFunction('Debit','Expense Increase');"  class="topleft">
+        <a href='#' class='ph-button ph-btn-greyEI'> Expense Increase </br></br></a>
+    </div>
+
+
+    <div type="button"  onclick="myFunction('Debit','Assets Increase');"  class="topright">
+        <a href='#' class='ph-button ph-btn-greyAI'> Asset Increase </br></br></a>
+    </div>
+
+        <h1 class="Bh1" >DEBIT</h1></a>
+
+
+
+    <div type="button"  onclick="myFunction('Debit','Liabilities/Owners Equity Decrease');" class="bottomleft">
+        <a href='#' class='ph-button ph-btn-grey'> Liabilities/Owners</br> Equity Decrease</a>
+    </div>
+
+
+
+    <div type="button"  onclick="myFunction('Debit','Income Decrease');"   class="bottomright">
+        <a href='#' class='ph-button ph-btn-grey' id="ID">Income Decrease </br> </br></a>
+    </div>
+
+  </div>
+  <div class="front">
+  <h1 id="H1" >DEBITS </h1>
+
+  <img class="cowImg" src="images/accounX.PNG" />
+</div>
+</div>
+
+<div class="flip3D">
+  <div class="back">
+
+
+
+
+
+   <div type="button"  onclick="myFunction('Credit','Expense Decrease');"   class="topleft">
+        <a href='#' class='ph-button ph-btn-greyE'> Expense Decrease </br></br></a>
+    </div>
+
+
+    <div type="button"  onclick="myFunction('Credit','Asset Decrease');"  class="topright">
+        <a href='#' class='ph-button ph-btn-greyA'> Asset Decrease </br></br></a>
+    </div>
+
+        <h1 class="Bh1" >CREDIT</h1></a>
+
+
+
+    <div type="button"  onclick="myFunction('Credit','Liabilities/Owners Equity Increase');"  class="bottomleft">
+        <a href='#' class='ph-button ph-btn-grey1'> Liabilities/Owners</br> Equity Increase</a>
+    </div>
+
+
+
+    <div type="button"  onclick="myFunction('Credit','Income Increase');"   class="bottomright">
+        <a href='#' class='ph-button ph-btn-grey1' id ="II">Income Increase </br> </br></a>
+    </div>
+
+
+
+
+
+  </div>
+  <div class="front">
+
+  <h1 id ="H1">
+  CREDITS
+  </h1>
+   <img class="cowImg" src="images/accounX.PNG" />
+  </div>
+</div>
+</div>
+<a  href="#"  class="demo-info demo-info-2" onclick="PassHeading();">PREVIOUS</a>
+<a  href="Summary.html" id="b1"   class="demo-info demo-info-1" onclick="GetAcooount();">NEXT</a>
+</div>
+</body>
+</html>
+
+<script>
+var Account1 ="Bank";
+var Account2 ="Sales";
+var diff="";
+//This method passing accounts to summary page
+function GetAcooount()
+{
+var table = document.getElementById("ans");
+//here iam taking values of the first row on the table ans and store them in the appropriate variables
+var acc1  =table.rows[1].cells[0].innerHTML;
+var accS1 =table.rows[1].cells[1].innerHTML;
+var DrCr1 =table.rows[1].cells[2].innerHTML;
+
+//here iam taking values of the Second row on the table ans and store them in the appropriate variables
+var acc2  =table.rows[2].cells[0].innerHTML;
+var accS2 =table.rows[2].cells[1].innerHTML;
+var DrCr2 =table.rows[2].cells[2].innerHTML;
+
+//Here iam passing those values using html5 session method called localstorage
+localStorage.setItem("Account1", acc1);
+localStorage.setItem("AccStatus1",accS1);
+localStorage.setItem("DRCR1", DrCr1);
+
+localStorage.setItem("Account2", acc2);
+localStorage.setItem("AccStatus2",accS2);
+localStorage.setItem("DR_CR2", DrCr2);
+
+localStorage.setItem("Entity1", entity1);
+localStorage.setItem("Entity2", entity2);
+
+
+}
+
+
+
+	function PassHeading()
+		{
+	
+           sessionStorage.setItem('Account1', Account1);    
+           sessionStorage.setItem('Account2', Account2);  
+		   sessionStorage.setItem('Entity1', localStorage.getItem("Entity1"));  
+		   sessionStorage.setItem('Entity2', localStorage.getItem("Entity2"));
+			var isInIFrame = (window.location != window.parent.location);
+if(isInIFrame==true){
+  window.location.href = "newboard.html";  
+}
+else {
+   window.location.href = "bootstrap-slider.php#my-div";
+}
+
+		}
+
+function Account()
+{
+
+  //accepting parameters board
+
+ if(sessionStorage.getItem('AccStatus1')!= null){
+ 
+		Account1 =sessionStorage.getItem('Account1');
+		Account2 =sessionStorage.getItem('Account2');
+		myFunction(sessionStorage.getItem("DRCR1"),sessionStorage.getItem("AccStatus1"));
+		myFunction(sessionStorage.getItem("DR_CR2"),sessionStorage.getItem("AccStatus2"));
+		
+		document.getElementById("b1").style.visibility='visible';
+	  document.getElementById("mrg").innerHTML = "Please select  " +  '<a href="Summary.html" onclick=" GetAcooount();" class="btnSlider">NEXT</a>'  + " to continue or edit to make changes ";
+	  
+	 
+	
+ }
+ else{
+  Account1=localStorage.getItem("Account1");
+  Account2=localStorage.getItem("Account2");
+  entity1 =localStorage.getItem("Entity1");
+  entity2 =localStorage.getItem("Entity2");
+  var text =Account1 ;
+  text=text.fontcolor("#990099")
+  document.getElementById("mrg").innerHTML = "Select the appropriate entity status for the account "+ text +" to determine if its a debit of credit. ";
+  document.getElementById("b1").style.visibility='hidden';
+  }
+  
+  
+}
+
+
+
+
+
+var assin=Account1;
+var dbOrCr="";
+var status="";
+function myFunction(dbOrCr,status) {
+    var table = document.getElementById("ans");
+  var rows = document.getElementById("ans").getElementsByTagName("tr").length;
+
+  var rows = document.getElementById("ans").getElementsByTagName("tr").length;
+
+  if(rows==1)
+  {
+    assin = Account1;
+  }
+  else
+  {
+     table = document.getElementById("ans");
+    var acc=table.rows[1].cells[0].innerHTML;
+    if(acc==Account2)
+    {
+      assin =Account1;
+    }
+    else
+    {
+    assin = Account2;
+  }
+  }
+
+  if(rows < 3){
+    if(diff ==dbOrCr)
+    {
+	sweetAlert("Oops...", "You cannot Debit both accounts or Credit both accounts!", "error");
+    
+    }
+    else
+    {
+    var row = table.insertRow(rows);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+
+
+
+    cell1.innerHTML =  assin;
+
+    cell2.innerHTML = status;
+    cell3.innerHTML = dbOrCr;
+    cell4.innerHTML = "<button id='"+rows+"' class='edit' onclick='Somefunction("+rows+");' >EDIT</button>";
+    var rows = document.getElementById("ans").getElementsByTagName("tr").length;
+}
+
+
+   if(rows ==2)
+
+    {
+      updateRibon(Account2);
+      diff=dbOrCr;
+      assin =Account2;
+
+    }
+    else
+
+    {
+        document.getElementById("b1").style.visibility='visible';
+	  document.getElementById("mrg").innerHTML = "Please select  " +   '<a href="Summary.html" onclick=" GetAcooount();" class="btnSlider">NEXT</a>' + " to proceed to the summary page or edit to make changes.";
+    }}
+
+    else
+    {
+    }
+
+    }
+
+var Accoun="";
+
+function updateRibon(Accoun)
+
+{
+
+
+  Accoun=  Accoun.fontcolor("#990099")
+  
+  document.getElementById("mrg").innerHTML = "Select the appropriate entity status for the account "+ Accoun +" to determine if its a debit of credit. ";
+  document.getElementById("b1").style.visibility='hidden';
+}
+
+
+
+function Somefunction(id) {
+  if(id==2  && document.getElementById("ans").getElementsByTagName("tr").length==2 ){
+
+    id = 1;
+  }
+var table = document.getElementById("ans");
+var acc=table.rows[id].cells[0].innerHTML;
+updateRibon(acc);
+
+
+assin =acc;
+document.getElementById("ans").deleteRow(id);
+ var rowsin = document.getElementById("ans").getElementsByTagName("tr").length;
+
+
+if(rowsin==1)
+{
+  diff="";
+  localStorage.getItem("DRCR1") = null;
+    Account();
+    document.getElementById("b1").style.visibility='hidden';
+}
+else
+{
+
+}
+
+}
+
+
+</script>

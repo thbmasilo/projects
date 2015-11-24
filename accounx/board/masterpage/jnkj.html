@@ -1,0 +1,529 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+	<link href="c.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<style type="text/css">
+		.content {
+			display: none;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
+
+	<script src="popup/dist/sweetalert-dev.js"></script>
+	<link rel="stylesheet" href="popup/dist/sweetalert.css">
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+	var globalOrg;
+	var navTo = '#Organization';
+		$('#menu a').each(function(){
+			id = $(this).attr('href');
+			id = id.substring(id.lastIndexOf('/'));
+			id = id.substring(0,id.indexOf('.'));
+			$(this).attr('rel',id);
+		});
+		$(navTo).show();
+		$('#menu a').click(function(e){
+			e.preventDefault();
+			$('.content').hide();
+			$('#'+$(this).attr('rel')).show();
+			location.hash = '#!/'+$(this).attr('rel');
+			return false;
+		});
+		var autocomplete = true;
+		var dataString = 'autocomplete='+true;
+
+		$.ajax({
+			type: "POST",
+			url: "autocomplete.php",
+			data: dataString,
+			cache: false,
+			beforeSend: function(){ },
+			success: function(data){
+			alert(data);
+				if(data == "security error"){swal({   title: "Sorry, you aren't supposed to be here.",   text: "",   timer: 20000,   showConfirmButton: false });window.location.href = "http://www.maganaprepaidmeter.co.za/accounx/";}//no session exists...
+
+				  var orgParsedData = JSON.parse(data);
+				  var orgData = [];
+				  for(var x in orgParsedData){orgData.push(orgParsedData[x]);globalOrg = orgData;}
+
+				/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
+				$(document).ready(
+
+				  /* This is the function that will get executed after the DOM is fully loaded */
+				  function () {
+
+					 /* binding the text box with the jQuery Auto complete function. */
+					$( "#txtInstructorFormOrganization" ).autocomplete({
+					  /*Source refers to the list of fruits that are available in the auto complete list. */
+					  source:orgData,
+					  /* auto focus true means, the first item in the auto complete list is selected by default. therefore when the user hits enter,
+					  it will be loaded in the textbox */
+					  autoFocus: true ,
+
+					});
+					$( "#txtSubscriptionFormOrganisation" ).autocomplete({
+					  /*Source refers to the list of fruits that are available in the auto complete list. */
+					  source:orgData,
+					  /* auto focus true means, the first item in the auto complete list is selected by default. therefore when the user hits enter,
+					  it will be loaded in the textbox */
+					  autoFocus: true ,
+
+					});
+				  }
+				);
+			}
+		});
+
+		$('#cmdOrganizationFormSubmit').click(function()
+		{
+
+			//alert($("#txtOrganizationFormOrganizationEndDate").val());if($("#txtOrganizationFormOrganizationEndDate").val() == ""){alert("1");}else{alert("2");}
+			var organisation=$("#txtOrganizationFormOrganizationName").val();
+			var contactNumber = $("#txtOrganizationFormOrganizationContactNumbers").val()
+			var email = $("#txtOrganizationFormOrganizationEmail").val();
+
+			var _endDate = $("#txtOrganizationFormOrganizationEndDate").val();
+			var _startDate = $("#txtOrganizationFormOrganizationStartDate").val();
+
+			go = false;
+			var xCount = 0;
+
+			var startDate = new Date(_startDate.substring(0,4),_startDate.substring(5,7),_startDate.substring(8,10));
+			var endDate = new Date(_endDate.substring(0,4),_endDate.substring(5,7),_endDate.substring(8,10));
+			if((_endDate == "") || (_startDate == "")){xCount++;}
+			else{
+				if(startDate <= endDate){
+
+				}else{
+
+				}
+			}
+
+
+
+			/** Email validation **/
+			//if(/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/.test(email)){go = true;xCount++;}
+			//else{go = false;xCount--;sweetAlert("Please provide a valid email.");}
+
+			var pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+			if(pattern.test(email)){
+				go = true;xCount++;
+			}else{
+				xCount--;sweetAlert("Please provide a valid email.");
+			}
+
+			/** Contact Number Validation **/
+			if(/^[0-9]{1,45}$/.test(contactNumber)){go = true;xCount++;}
+			else{go = false;xCount--;sweetAlert("Please provide a valid number.", " No spaces e.g 0737960791 format is 27737960791");}
+
+
+			for(var ix = 0; ix < globalOrg.length;ix++){
+				globalOrg[ix] = globalOrg[ix].toLowerCase();
+			}
+			organisation = organisation.toLowerCase();
+
+			/** OrganisationValidation **/
+			if(globalOrg.indexOf(organisation)>=0){go = false;xCount--;sweetAlert("Organisation already exists");}else{go = true;xCount++;}
+
+			var dataString = 'organisation='+organisation+'&contactNumber='+contactNumber+'&email='+email;
+			if(xCount == 4)
+			{	$.ajax({
+					type: "POST",
+					url: "Organization.php",
+					data: dataString,
+					cache: false,
+					beforeSend: function(){ $("#cmdOrganizationFormSubmit").val('Please wait...');},
+					success: function(data){
+						if(data){
+							if(data == 1)
+							{
+								$("#cmdOrganizationFormSubmit").val('Save');
+								sweetAlert("Organization Added", "");
+							}
+							else
+							{
+								$("#cmdOrganizationFormSubmit").val('Save');
+								sweetAlert("A Server side error occurred", "");
+							}
+						}else{sweetAlert("A Server side error occurred.", "");}
+					}
+				});
+				document.getElementById('txtOrganizationFormOrganizationName').value='';
+				document.getElementById('txtOrganizationFormOrganizationContactNumbers').value='';
+				document.getElementById('txtOrganizationFormOrganizationEmail').value='';
+			}
+			else{
+				//sweetAlert("Your Form is incomplete" +" "+ "Please fill in the relevent fields");
+			}
+			navTo = '#Organization';
+		});
+
+
+	$('#cmdInstructorFormSubmit').click(function()
+			{
+				var useremail= $("#txtInstructorFormEmail").val();
+				var userpassword = $("#txtInstructorFormEmail").val();
+				var lastname = $("#txtInstructorFormLastname").val();
+				var Firstname = $("#txtInstructorFormFirstname").val();
+				var Institution = $("#txtInstructorFormOrganization").val();
+
+				var xCount = 0;
+
+				/*The three can be combined to /^[a-z ,.'-]+$/i
+				var Namepattern1=/^[A-Z][-a-zA-Z]+$/;
+				var Namepattern2=/^[A-Z][-'a-zA-Z]+$/;
+				var Namepattern3=/^[A-Z]'?[- a-zA-Z]( [a-zA-Z])*$/;*/
+				var namepattern = /^[a-z ,.'-]+$/i;
+				if(namepattern.test(Firstname)){
+					xCount++;
+				}else{
+					xCount--;sweetAlert("Unacceptable first name format provided.");
+				}
+				if(namepattern.test(lastname)){
+					xCount++;
+				}else{
+					xCount--;sweetAlert("Unacceptable last name format provided.");
+				}
+				var pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+				if(pattern.test(useremail)){
+					xCount++;
+				}else{
+					xCount--;sweetAlert("Please provide a valid email.");
+				}
+
+				for(var ix = 0; ix < globalOrg.length;ix++){
+					globalOrg[ix] = globalOrg[ix].toLowerCase();
+				}
+				Institution = Institution.toLowerCase();
+
+				/** OrganisationValidation **/
+				if(globalOrg.indexOf(Institution)<0){xCount--;sweetAlert("The Organization doesn't exist.");}else{xCount++;}
+
+				var dataString = 'useremail='+useremail+'&userpassword='+userpassword+'&lastname='+lastname+'&Firstname='+Firstname+'&Institution='+Institution;
+				if(xCount == 4)
+				{	$.ajax({
+						type: "POST",
+						url: "Instructor.php",
+						data: dataString,
+						cache: false,
+						beforeSend: function(){ $("#cmdInstructorFormSubmit").val('Please wait...');},
+						success: function(data){
+							if(data){
+								if(data == 1)
+								{
+									$("#cmdInstructorFormSubmit").val('Submit');
+									sweetAlert("Instructor Added", "success");
+								}
+								else
+								{
+									$("#cmdInstructorFormSubmit").val('Submit');
+									sweetAlert("A Server side error occurred.", "error");
+								}
+							}else{sweetAlert("A Server side error occurred.", "error");}
+						}
+					});
+
+					document.getElementById('txtInstructorFormEmail').value='';
+
+					document.getElementById('txtInstructorFormFirstname').value='';
+					document.getElementById('txtInstructorFormLastname').value='';
+					document.getElementById('txtInstructorFormOrganization').value='';
+				}
+				else{
+					sweetAlert(xCount);
+				}
+				navTo = '#Instructor';
+			});
+
+			$('#cmdSubscriptionSubmit').click(function()
+			{
+				var organisation=$("#txtSubscriptionFormOrganisation").val();
+				var _endDate = $("#txtSubscriptionFormEndDate").val();
+				var _startDate = $("#txtSubscriptionFormStartDate").val();
+				var go = 0;
+
+				var startDate = new Date(_startDate.substring(0,4),_startDate.substring(5,7),_startDate.substring(8,10));
+				var endDate = new Date(_endDate.substring(0,4),_endDate.substring(5,7),_endDate.substring(8,10));
+				var today = new Date();
+				if((_endDate == "") || (_startDate == "")){go--;}
+				else{
+					if((startDate >= endDate) && (startDate >= today) && (endDate >= endDate)){
+						go++;
+					}else{
+						sweetAlert("Dates shouldn't be in the past, and Start date must be precedes End Date");
+					}
+				}
+
+				for(var ix = 0; ix < globalOrg.length;ix++){
+					globalOrg[ix] = globalOrg[ix].toLowerCase();
+				}
+				organisation = organisation.toLowerCase();
+
+				/** OrganisationValidation **/
+				if(globalOrg.indexOf(organisation)>=0){go++;}else{go--;sweetAlert("The Organization doesn't exist.");}
+
+				var e = document.getElementById("slctSubscriptionFormStatus");
+				var status = e.options[e.selectedIndex].text;
+
+				if(status == "Select Status"){go--;sweetAlert("Please specify the status.");}
+				else{go++;}
+
+				var dataString = 'organisation='+organisation+'&status='+status+'&startDate='+_startDate+'&endDate='+_endDate;
+				if(go == 3)
+				{	$.ajax({
+						type: "POST",
+						url: "Subscription.php",
+						data: dataString,
+						cache: false,
+						beforeSend: function(){ $("#cmdSubscriptionSubmit").val('Please wait...');},
+						success: function(data){
+							if(data){
+								if(data == 1)
+								{
+									$("#cmdSubscriptionSubmit").val('Submit');
+									sweetAlert("Sunscription created", "success");
+								}
+								else
+								{
+									$("#cmdSubscriptionSubmit").val('Submit');
+									sweetAlert("A Server side error occurred.", "error");
+								}
+							}else{sweetAlert("A Server side error occurred.", "error");}
+						}
+					});
+					document.getElementById('name').value='';
+				}
+				else{
+					//sweetAlert("Your Form is incomplete", "Please fill in the relevent fields");
+				}
+				navTo = '#Subscription';
+			});
+
+		});
+	</script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AccounX</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar">
+            <li><a href="http://www.maganaprepaidmeter.co.za/accounx/AdminPage/admindashboard.html">Dashboard</a></li>
+            <li><a href="#">The Tool</a></li>
+            <li><a href="#">About The Tool</a></li>
+          </ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="http://www.maganaprepaidmeter.co.za/accounx/">Logout</a></li>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+	<div id="container">
+
+		<div id="sideMenu">
+		<div id="titleBar">
+				<img src="images/accounxlogo.jpg" width="150px" />
+
+			</div>
+			<div id="menu">
+				<ul class="menu">
+					<li>Management Utility</li>
+					<li><a href="Organization.html">Organization</a> </li>
+					<li><a href="Instructor.html">Instructor</a></li>
+					<li><a href="Subscription.html">Subscription</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div id="content" class="text-muted">
+			<div id="titleBar">
+				<div id="profilePic">
+				<img src="images/spinning_pic.jpg" />
+				</div>
+				<span class="controls activeControl">Admin</span>
+			</div>
+			<div class="mainChart">
+				<div id="Organization" class="content">
+					<!-- Example row of columns -->
+					<div class="row">
+						<div class="col-md-8">
+							<form action="" method="POST" class="form-horizontal">
+								<div class="form-group">
+									<label><h3>Organization</h3></label>
+								</div>
+								<div class="form-group">
+									<label for="txtOrganizationFormOrganizationName" class="col-sm-4 control-label">Name</label>
+									<div class="col-sm-6">
+									<input type="text" class="form-control" id="txtOrganizationFormOrganizationName" placeholder="Organization Name">
+								</div></div>
+								<div class="form-group">
+									<label for="txtOrganizationFormOrganizationEmail" class="col-sm-4 control-label">Email address</label>
+									<div class="col-sm-6">
+									<input type=email class="form-control" id="txtOrganizationFormOrganizationEmail" placeholder="Email Address">
+								</div></div>
+								<div class="form-group">
+									<label for="txtOrganizationFormOrganizationContactNumbers" class="col-sm-4 control-label">Contact Number:</label>
+									<div class="col-sm-6">
+									<input type="input" class="form-control" id="txtOrganizationFormOrganizationContactNumbers" placeholder="Numbers" onkeypress='return isNumberKey(event)'/>
+								</div>
+								</div>
+								<div class="panel panel-default">
+									<div class="panel-heading">Subscription Information (Optional)</div>
+									<div class="panel-body">
+										<form>
+											<div class="form-group">
+												<label for="txtOrganizationFormOrganizationStartDate" class="col-sm-4 control-label">Start</label><div class="col-sm-6">
+												<input type="date" name="StartDate" class="form-control" id="txtOrganizationFormOrganizationStartDate">
+											</div></div>
+											<div class="form-group">
+												<label for="txtOrganizationFormOrganizationEndDate" class="col-sm-4 control-label">End</label><div class="col-sm-6">
+												<input type="date" name="EndDate" class="form-control" id="txtOrganizationFormOrganizationEndDate">
+											</div></div>
+										</form>
+									</div>
+								</div>
+								<button id="cmdOrganizationFormSubmit" type="submit" class="btn btn-default">Save</button>
+							</form>
+						</div>
+						<!--<div class="col-md-8">
+							<form>
+								<div class="form-group">
+									<label><h3>Search</h3></label>
+								</div>
+							</form>
+							<form class="form-inline">
+								<div class="form-group">
+									<label class="sr-only" for="txtOrganizationSearchFormOrganizationName">Name</label>
+									<input type="password" class="form-control" id="txtOrganizationSearchFormOrganizationName" placeholder="Organization Name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtOrganizationSearchFormOrganizationEmail">Email address</label>
+									<input type="email" class="form-control" id="txtOrganizationSearchFormOrganizationEmail" placeholder="Enter email">
+								</div>
+								<select name="cars" class="form-control" id="slctOrganizationSearchFormOrganizationStatus">
+									<option value="volvo">All Subscriptions</option>
+									<option value="saab">Active</option>
+									<option value="fiat">Inactive</option>
+								</select>
+								<button id="cmdOrganizationSearchFormSearch" type="submit" class="btn btn-default">Search</button>
+							</form>
+						</div>-->
+					</div>
+				</div>
+
+				<div id="Instructor" class="content">
+					<div class="row">
+						<div class="col-md-7">
+							<form class="form-horizontal">
+								<div class="form-group">
+									<label><h3>Instructor</h3></label>
+								</div>
+								<div class="form-group">
+									<label for="txtInstructorFormFirstname" class="col-sm-4 control-labe">First Name</label><div class="col-sm-6">
+									<input type="text" class="form-control" id="txtInstructorFormFirstname" placeholder="First Name">
+								</div></div>
+								<div class="form-group">
+									<label for="txtInstructorFormLastname" class="col-sm-4 control-labe">Last Name</label><div class="col-sm-6">
+									<input type="text" class="form-control" id="txtInstructorFormLastname" placeholder="Last Name">
+								</div></div>
+								<div class="form-group">
+									<label for="txtInstructorFormEmail" class="col-sm-4 control-labe">Email address</label><div class="col-sm-6">
+									<input type="email" class="form-control" id="txtInstructorFormEmail" placeholder="Enter email">
+								</div></div>
+								<div class="form-group">
+									<label for="txtInstructorFormOrganization" class="col-sm-4 control-labe">Institution</label><div class="col-sm-6">
+									<input type="digits" class="form-control" id="txtInstructorFormOrganization" placeholder="Institution">
+								</div></div>
+								<button id="cmdInstructorFormSubmit" type="submit" class="btn btn-default">Save</button>
+							</form>
+						</div>
+
+						<!--<div class="col-md-8">
+							<form>
+								<div class="form-group">
+									<label><h3>Search</h3></label>
+								</div>
+							</form>
+							<form class="form-inline">
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormLastName">LName</label>
+									<input type="password" class="form-control" id="txtInstructorSearchFormLastName" placeholder="Last Name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormFirstname">FName</label>
+									<input type="password" class="form-control" id="txtInstructorSearchFormFirstname" placeholder="First Name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormEmail">Email address</label>
+									<input type="email" class="form-control" id="txtInstructorSearchFormEmail" placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormInstitution">Institution</label>
+									<input type="password" class="form-control" id="txtInstructorSearchFormInstitution" placeholder="Institution">
+								</div>
+								<button type="submit" id="cmdInstructorSearchFormSearch" class="btn btn-default">Search</button>
+							</form>
+						</div>-->
+					</div>
+				</div>
+
+				<div id="Subscription" class="content">
+					<div class="col-md-7">
+					<form class="form-horizontal">
+						<div class="form-group">
+								<label><h3>Subscription</h3></label>
+							</div>
+							<div class="form-group">
+								<label for="txtSubscriptionFormOrganisation" class="col-sm-4 control-labe">Organization</label>
+								<div class="col-sm-6"><input type="text" class="form-control" id="txtSubscriptionFormOrganisation" placeholder="Organisation Name"></div>
+							</div>
+							<div class="form-group">
+								<label for="txtSubscriptionFormStartDate" class="col-sm-4 control-labe">Start Date</label>
+								<div class="col-sm-6"><input type="date" class="form-control" id="txtSubscriptionFormStartDate" ></div>
+							</div>
+							<div class="form-group">
+								<label for="txtSubscriptionFormEndDate" class="col-sm-4 control-labe">End Date</label>
+								<div class="col-sm-6"><input type="date" class="form-control" id="txtSubscriptionFormEndDate"></div>
+							</div>
+							<div class="form-group">
+								<label for="slctSubscriptionFormStatus" class="col-sm-4 control-labe">Status</label>
+								<div class="col-sm-6"><select class="form-control" id="slctSubscriptionFormStatus">
+									<option value="">Select Status</option>
+									<option value="">Active</option>
+									<option value="">Inactive</option>
+								</select></div>
+							</div>
+							<button id="cmdSubscriptionSubmit" type="submit" class="btn btn-default">Save</button>
+					</form>
+				</div>
+				</div>
+
+				<div id="Statistics" class="content">
+					Three content.
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

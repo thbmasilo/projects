@@ -1,0 +1,424 @@
+<html>
+<head>
+
+	<link href="c.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+	<style type="text/css">
+		.content {
+			display: none;
+		}
+	</style>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.js"></script>
+	
+	<script src="popup/dist/sweetalert-dev.js"></script>
+	<link rel="stylesheet" href="popup/dist/sweetalert.css">
+	<script type="text/javascript">
+
+	$(document).ready(function(){
+		$('#menu a').each(function(){
+			id = $(this).attr('href');
+			id = id.substring(id.lastIndexOf('/'));
+			id = id.substring(0,id.indexOf('.'));
+			$(this).attr('rel',id);
+		});
+		$('#Organization').show();
+		$('#menu a').click(function(e){
+			e.preventDefault();
+			$('.content').hide();
+			$('#'+$(this).attr('rel')).show();
+			location.hash = '#!/'+$(this).attr('rel');
+			return false;
+		});
+		var autocomplete = true;
+		var dataString = 'autocomplete='+true;
+		
+		$.ajax({
+			type: "POST",
+			url: "autocomplete.php",
+			data: dataString,
+			cache: false,
+			beforeSend: function(){ },
+			success: function(data){
+				  var orgParsedData = JSON.parse(data);
+				  var orgData = [];
+				  for(var x in orgParsedData){orgData.push(orgParsedData[x]);}
+				  
+				/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
+				$(document).ready(
+				  
+				  /* This is the function that will get executed after the DOM is fully loaded */
+				  function () {
+					
+				  /* binding the text box with the jQuery Auto complete function. */
+					$( "#txtOrganizationFormOrganizationName" ).autocomplete({
+					  /*Source refers to the list of fruits that are available in the auto complete list. */
+					  source:orgData,
+					  /* auto focus true means, the first item in the auto complete list is selected by default. therefore when the user hits enter,
+					  it will be loaded in the textbox */
+					  autoFocus: true ,
+
+					});
+				  }
+				);	
+			}
+		});
+		
+		$('#cmdOrganizationFormSubmit').click(function()
+		{
+			var organisation=$("#txtOrganizationFormOrganizationName").val();
+			var contactNumber = $("#txtOrganizationFormOrganizationContactNumbers").val()
+			var email = $("#txtOrganizationFormOrganizationEmail").val();
+			go = false;
+			
+			/** Email validation **/
+			if(/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/.test(email)){go = true;}
+			else{go = false;sweetAlert("Please provide a valid email.");}
+			
+			/*var pattern=/^([a-zA-Z0-9_.-])+@([a-zA-Z0-9_.-])+\.([a-zA-Z])+([a-zA-Z])+/;
+			if(pattern.test(email)){         
+				alert("true");   
+			}else{   
+				alert("false"); 
+			}*/
+			
+			/** Contact Number Validation **/
+			if(/^\d{15}$/.test(contactNumber)){go = true;}
+			else{go = false;sweetAlert("Please provide a valid number.", " No spaces e.g 0737960791 format is 27737960791");}
+			
+			var dataString = 'organisation='+organisation+'&contactNumber='+contactNumber+'&email='+email;
+			if(go)
+			{	$.ajax({
+					type: "POST",
+					url: "Organization.php",
+					data: dataString,
+					cache: false,
+					beforeSend: function(){ $("#cmdOrganizationFormSubmit").val('Please wait...');},
+					success: function(data){
+						if(data){
+							if(data == 1)
+							{
+								$("#cmdOrganizationFormSubmit").val('Save');
+								sweetAlert("Organization Added", "success");
+							}
+							else
+							{
+								$("#cmdOrganizationFormSubmit").val('Save');
+								sweetAlert("Something wrong happened.", "error");								
+							}
+						}else{sweetAlert("Something wrong happened.", "error");}
+					}
+				});	
+				document.getElementById('txtOrganizationFormOrganizationName').value='';
+				document.getElementById('txtOrganizationFormOrganizationContactNumbers').value='';
+				document.getElementById('txtOrganizationFormOrganizationEmail').value='';
+			}
+			else{
+				//sweetAlert("Your Form is incomplete" +" "+ "Please fill in the relevent fields");
+			}
+		});
+
+
+	$('#cmdInstructorFormSubmit').click(function()
+			{
+				var useremail= $("#txtInstructorFormEmail").val();
+				var userpassword = $("#txtInstructorFormEmail").val();
+				var lastname = $("#txtInstructorFormLastname").val();
+				var Firstname = $("#txtInstructorFormFirstname").val();
+				var Institution = $("#txtInstructorFormOrganization").val();
+				
+				var dataString = 'useremail='+useremail+'&userpassword='+userpassword+'&lastname='+lastname+'&Firstname='+Firstname+'&Institution='+Institution;
+				if($.trim(Institution).length>0)
+				{	$.ajax({
+						type: "POST",
+						url: "Instructor.php",
+						data: dataString,
+						cache: false,
+						beforeSend: function(){ $("#cmdInstructorFormSubmit").val('Please wait...');},
+						success: function(data){
+							if(data){
+								if(data == 1)
+								{
+									$("#cmdInstructorFormSubmit").val('Submit');
+									sweetAlert("Instructor Added", "success");
+								}
+								else
+								{
+									$("#cmdInstructorFormSubmit").val('Submit');
+									sweetAlert("Something wrong happened.", "error");								
+								}
+							}else{sweetAlert("Something wrong happened.", "error");}
+						}
+					});	
+					 
+					document.getElementById('txtInstructorFormEmail').value='';
+				
+					document.getElementById('txtInstructorFormFirstname').value='';
+					document.getElementById('txtInstructorFormLastname').value='';
+					document.getElementById('txtInstructorFormOrganization').value='';
+				}
+				else{
+					sweetAlert("Your Form is incomplete", "Please fill in the relevent fields");
+				}
+			});
+			
+			$('#cmdSubscriptionSubmit').click(function()
+			{
+				var organisation=$("#txtSubscriptionFormOrganisation").val();
+				var startDate = $("#txtSubscriptionFormStartDate").val()
+				var endDate = $("#txtSubscriptionFormEndDate").val();
+				
+				var e = document.getElementById("slctSubscriptionFormStatus");
+				var status = e.options[e.selectedIndex].text;
+								
+				var dataString = 'organisation='+organisation+'&status='+status+'&startDate='+startDate+'&endDate='+endDate;
+				if($.trim(organisation).length>0)
+				{	$.ajax({
+						type: "POST",
+						url: "Subscription.php",
+						data: dataString,
+						cache: false,
+						beforeSend: function(){ $("#cmdSubscriptionSubmit").val('Please wait...');},
+						success: function(data){
+							if(data){
+								if(data == 1)
+								{
+									$("#cmdSubscriptionSubmit").val('Submit');
+									sweetAlert("Sunscription created", "success");
+								}
+								else
+								{
+									$("#cmdSubscriptionSubmit").val('Submit');
+									sweetAlert("Something wrong happened.", "error");								
+								}
+							}else{sweetAlert("Something wrong happened.", "error");}
+						}
+					});	
+					document.getElementById('name').value='';
+				}
+				else{
+					sweetAlert("Your Form is incomplete", "Please fill in the relevent fields");
+				}
+				return false;
+				});
+			
+		});
+	</script>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">AccounX</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">The Tool</a></li>
+            <li><a href="#">About The Tool</a></li>
+          </ul>          
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#">Logout</a></li>          
+          </form>
+        </div>
+      </div>
+    </nav>
+	
+	<div id="container">
+	
+		<div id="sideMenu">
+			<div id="menu">
+				<ul class="menu">
+					<li>Management Utility</li>
+					<li><a href="Organization.html">Organization</a> </li>
+					<li><a href="Instructor.html">Instructor</a></li>
+					<li><a href="Subscription.html">Subscription</a></li>
+				</ul>
+				<ul class="menu">
+					<li>Statistics</li>
+					<li><a href="Statistics.html">Subscription</a> <span class="notification">4</span></li>
+				</ul>
+			</div>
+		</div>
+		
+		<div id="content" class="text-muted">
+			<div id="titleBar">
+				<div id="profilePic">
+					<img src="http://s3-us-west-2.amazonaws.com/s.cdpn.io/153917/profile/profile-512_1.jpg" />
+				</div>
+				<span class="controls activeControl">Admin</span>        
+			</div>
+			<div class="mainChart">
+				<div id="Organization" class="content">
+					<!-- Example row of columns -->
+					<div class="row">
+						<div class="col-md-4">							
+							<form>
+								<div class="form-group">
+									<label><h3>Organization</h3></label>
+								</div>
+								<div class="form-group">
+									<label>Name</label>
+									<input type="text" class="form-control" id="txtOrganizationFormOrganizationName" placeholder="Organization Name">
+								</div>
+								<div class="form-group">
+									<label>Email address</label>
+									<input type="email" class="form-control" id="txtOrganizationFormOrganizationEmail" placeholder="Email Address">
+								</div>
+								<div class="form-group">
+									<label>Contact Number:</label>
+									<input type="digits" maxlength="16" class="form-control" id="txtOrganizationFormOrganizationContactNumbers" placeholder="Numbers">
+								</div>
+								
+								<div class="panel panel-default">
+									<div class="panel-heading">Subscription Information (Optional)</div>
+									<div class="panel-body">
+										<form>											
+											<div class="form-group">
+												<label>Start</label>
+												<input type="date" name="StartDate" class="form-control" id="txtOrganizationFormOrganizationStartDate">
+											</div>
+											<div class="form-group">
+												<label>End</label>
+												<input type="date" name="EndDate" class="form-control" id="txtOrganizationFormOrganizationEndDate">
+											</div>
+										</form>
+									</div>
+								</div>	
+								<button id="cmdOrganizationFormSubmit" type="submit" class="btn btn-default">Save</button>
+							</form>
+						</div>
+						<div class="col-md-8">
+							<form>
+								<div class="form-group">
+									<label><h3>Search</h3></label>
+								</div>
+							</form>
+							<form class="form-inline">
+								<div class="form-group">
+									<label class="sr-only" for="txtOrganizationSearchFormOrganizationName">Name</label>
+									<input type="password" class="form-control" id="txtOrganizationSearchFormOrganizationName" placeholder="Organization Name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtOrganizationSearchFormOrganizationEmail">Email address</label>
+									<input type="email" class="form-control" id="txtOrganizationSearchFormOrganizationEmail" placeholder="Enter email">
+								</div>
+								<select name="cars" class="form-control" id="slctOrganizationSearchFormOrganizationStatus">
+									<option value="volvo">All Subscriptions</option>
+									<option value="saab">Active</option>
+									<option value="fiat">Inactive</option>
+								</select>
+								<button id="cmdOrganizationSearchFormSearch" type="submit" class="btn btn-default">Search</button>
+							</form>
+						</div>
+					</div>
+				</div>
+				
+				<div id="Instructor" class="content">
+					<div class="row">
+						<div class="col-md-4">							
+							<form>
+								<div class="form-group">
+									<label><h3>Instructor</h3></label>
+								</div>
+								<div class="form-group">
+									<label>First Name</label>
+									<input type="text" class="form-control" id="txtInstructorFormFirstname" placeholder="First Name">
+								</div>
+								<div class="form-group">
+									<label>Last Name</label>
+									<input type="text" class="form-control" id="txtInstructorFormLastname" placeholder="Last Name">
+								</div>
+								<div class="form-group">
+									<label>Email address</label>
+									<input type="email" class="form-control" id="txtInstructorFormEmail" placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label>Institution</label>
+									<input type="digits" class="form-control" id="txtInstructorFormOrganization" placeholder="Institution">
+								</div>
+								<button id="cmdInstructorFormSubmit" type="submit" class="btn btn-default">Save</button>
+							</form>
+						</div>
+						
+						<div class="col-md-8">
+							<form>
+								<div class="form-group">
+									<label><h3>Search</h3></label>
+								</div>
+							</form>
+							<form class="form-inline">
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormLastName">LName</label>
+									<input type="password" class="form-control" id="txtInstructorSearchFormLastName" placeholder="Last Name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormFirstname">FName</label>
+									<input type="password" class="form-control" id="txtInstructorSearchFormFirstname" placeholder="First Name">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormEmail">Email address</label>
+									<input type="email" class="form-control" id="txtInstructorSearchFormEmail" placeholder="Enter email">
+								</div>
+								<div class="form-group">
+									<label class="sr-only" for="txtInstructorSearchFormInstitution">Institution</label>
+									<input type="password" class="form-control" id="txtInstructorSearchFormInstitution" placeholder="Institution">
+								</div> 
+								<button type="submit" id="cmdInstructorSearchFormSearch" class="btn btn-default">Search</button>								
+							</form>
+						</div>						
+					</div>
+				</div>
+				
+				<div id="Subscription" class="content">
+					<form>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label><h3>Subscription</h3></label>
+							</div>
+							<div class="form-group">
+								<label>Organization</label>
+								<input type="text" class="form-control" id="txtSubscriptionFormOrganisation" placeholder="Organisation Name">
+							</div>
+							<div class="form-group">
+								<label>Start Date</label>
+								<input type="date" class="form-control" id="txtSubscriptionFormStartDate" >
+							</div>
+							<div class="form-group">
+								<label>End Date</label>
+								<input type="date" class="form-control" id="txtSubscriptionFormEndDate">
+							</div>
+							<div class="form-group">
+								<label>Status</label>
+								<select class="form-control" id="slctSubscriptionFormStatus">
+									<option value="">Select Status</option>
+									<option value="">Active</option>
+									<option value="">Inactive</option>
+								</select>
+							</div>								
+							<button id="cmdSubscriptionSubmit" type="submit" class="btn btn-default">Save</button>
+						</div>
+					</form>
+				</div>
+				
+				<div id="Statistics" class="content">
+					Three content.
+				</div>
+			</div>
+		</div>		
+	</div>
+</body>
+</html>

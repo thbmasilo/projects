@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <!-- Source our javascript file with the jQUERY code -->
+    <script src="script.js"></script>
+	
+	<title>Forgot Password</title>
+	<link rel="stylesheet" type="text/css" href="css/adminStyles.css"/>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>	
+	<script src="js/jquery.min.js"></script>
+	<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
+	<script src="popup/dist/sweetalert-dev.js"></script>
+	<link rel="stylesheet" href="popup/dist/sweetalert.css">
+
+	<script>
+		$(document).ready(function() {
+			
+			var autocomplete = true;
+			var dataString = 'autocomplete='+true;
+			
+			$.ajax({
+					type: "POST",
+					url: "autocomplete.php",
+					data: dataString,
+					cache: false,
+					beforeSend: function(){ },
+					success: function(data){
+						  var orgParsedData = JSON.parse(data);
+						  var orgData = [];
+						  for(var x in orgParsedData){orgData.push(orgParsedData[x]);}
+						  
+						/*  jQuery ready function. Specify a function to execute when the DOM is fully loaded.  */
+						$(document).ready(
+						  
+						  /* This is the function that will get executed after the DOM is fully loaded */
+						  function () {
+							
+						  /* binding the text box with the jQuery Auto complete function. */
+							$( "#Name" ).autocomplete({
+							  /*Source refers to the list of fruits that are available in the auto complete list. */
+							  source:orgData,
+							  /* auto focus true means, the first item in the auto complete list is selected by default. therefore when the user hits enter,
+							  it will be loaded in the textbox */
+							  autoFocus: true ,
+
+							});
+						  }
+						);	
+					}
+				});	
+		
+			$('#submitNewSubscription').click(function()
+			{
+				var organisation=$("#Name").val();
+				var startDate = $("#startDate").val()
+				var endDate = $("#endDate").val();
+				
+				var e = document.getElementById("status");
+				var status = e.options[e.selectedIndex].text;
+								
+				var dataString = 'organisation='+organisation+'&status='+status+'&startDate='+startDate+'&endDate='+endDate;
+				if($.trim(organisation).length>0)
+				{	$.ajax({
+						type: "POST",
+						url: "Subscription.php",
+						data: dataString,
+						cache: false,
+						beforeSend: function(){ $("#submitNewSubscription").val('Please wait...');},
+						success: function(data){
+							if(data){
+								if(data == 1)
+								{
+									$("#submitNewSubscription").val('Submit');
+									sweetAlert("Sunscription created", "success");
+								}
+								else
+								{
+									$("#submitNewSubscription").val('Submit');
+									sweetAlert("Something wrong happened.", "error");								
+								}
+							}else{sweetAlert("Something wrong happened.", "error");}
+						}
+					});	
+					document.getElementById('name').value='';
+				}
+				else{
+					sweetAlert("Your Form is incomplete", "Please fill in the relevent fields");
+				}
+				return false;
+				});
+			});
+		</script>
+</head>
+
+<body>
+
+  <section id="box" >
+  
+	<circle>
+		<img src="../pictures/Logo.jpg"  height="40" width="100" ></img>
+	</circle>
+  
+	<form action="" method="post" id="SubscriptionForm" >
+		<div class="example">
+    <div class="menuholder">
+        <ul class="menu slide">
+            <li><a href="Instructor.html" class="green">Users</a></li>
+            <li><a href="Organization.html" class="orange">Organization</a>
+			<li><a href="subscription.html" class="yellow">Subsciption</a>
+			<li><a href="../index.php" class="orange">Logout</a>
+	  </ul>
+        <div class="back"></div>
+        <div class="shadow"></div>
+    </div>
+    <div style="clear:both"></div>
+	</div>
+	
+	<h1>Subscription</h1>
+	<table>
+		<tr>
+		<th >Organization Name:</th>
+		<td><input type="input" id="Name" class="textfield" placeholder="Enter Text"></input></td>
+		</tr>
+			
+		<tr >
+		<th>Start Date:</th>
+		<td>
+			<input type="date" id="startDate" class="textfield"/>
+		</input></td>
+		</tr>
+	
+		<tr >
+		<th>End Date:</th>
+		<td><input type="date" class="textfield" id="endDate" /></td>
+		</tr>
+	
+		<tr >
+		<th>Status:</th>
+		<td>
+		<select class="textfield" id="status">
+			<option value="">Select Status</option>
+			<option value="">Active</option>
+			<option value="">Inactive</option>
+		</select> 
+		</td>
+		</tr>
+		
+	<tr >
+		<th></th>
+		<td ><input type="submit"  id="submitNewSubscription" name="submitNewSubscription" value="Submit"/>
+		</tr>
+	</table>
+	</form>
+  </section>
+
+</body>
+
+</html>

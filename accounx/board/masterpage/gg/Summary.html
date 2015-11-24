@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h2
+{
+  color:white;
+text-align:center;
+margin-bottom:10px;
+font-size:18px;
+
+}
+
+h1
+{
+color:#009900;
+text-align:center;
+margin-top: 20px;
+margin-bottom:30px;
+font-family: "Comic Sans MS", Times, serif;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+#container
+{
+border-radius: 96px 55px 96px 55px;
+-moz-border-radius: 96px 55px 96px 55px;
+-webkit-border-radius: 96px 55px 96px 55px;
+border: 0px solid #424142;
+background:#ffecc7;
+margin-left:190px;
+width:70%;
+padding-bottom:40px;
+padding-top:30px;
+}
+
+
+#border-radius
+{
+
+  border-radius: 12px 54px 5px 54px;
+  -moz-border-radius: 12px 54px 5px 54px;
+  -webkit-border-radius: 12px 54px 5px 54px;
+  border: 3px solid #424142;
+  margin-left:250px;
+margin-bottom:10px;
+margin-top:10px;
+background:#424142;
+  width:50%;
+
+}
+
+
+#ans
+{
+
+border: white solid 2px;
+width:80%;
+height: auto;
+margin-left:100px;
+text-align:center;
+
+background:#993D3D;
+ border-radius: 11px;
+ color:#DBD8D7;
+
+
+}
+#ans th
+
+{
+color:#FFEBF5;
+}
+
+
+#ans1
+{
+
+border: white solid 2px;
+width:80%;
+height: auto;
+margin-left:100px;
+text-align:center;
+
+background:#1A4C80;
+ border-radius: 11px;
+ color:#F8F8FF;
+
+
+}
+#ans1 th
+
+{
+color:#FFEBF5;
+}
+</style>
+
+<script>
+function ShowAcooount()
+{
+// Retrieve
+
+//document.getElementById("lblAccount").innerHTML = localStorage.getItem("lastname");
+ //var name = localStorage.getItem("lastname");
+//alert("My name is : " +name)
+
+var table = document.getElementById("ans1");
+
+alert(localStorage.getItem("Account1"));
+table.rows[1].cells[1].innerHTML =localStorage.getItem("Account1");
+table.rows[1].cells[2].innerHTML =localStorage.getItem("AccStatus1");
+table.rows[1].cells[3].innerHTML =localStorage.getItem("DRCR1");
+
+alert(localStorage.getItem("DRCR1"));
+table.rows[2].cells[1].innerHTML =localStorage.getItem("Account2");
+table.rows[2].cells[2].innerHTML =localStorage.getItem("AccStatus2");
+table.rows[2].cells[3].innerHTML =localStorage.getItem("DR_CR2");
+
+
+//First Table Ans
+var table1 = document.getElementById("ans");
+table1.rows[1].cells[1].innerHTML =localStorage.getItem("Account1");
+table1.rows[1].cells[2].innerHTML =localStorage.getItem("Entity1");
+
+table1.rows[2].cells[1].innerHTML =localStorage.getItem("Account2");
+table1.rows[2].cells[2].innerHTML =localStorage.getItem("Entity2");
+
+}
+
+
+</script>
+<body onload ="ShowAcooount();" >
+<div id="container">
+<lable id="lblAccount"><font color="green" > </font></lable>
+<h1 id="mrg">
+     <strong > Overall Summary</strong>
+  </h1>
+  <div id="border-radius">
+<h2>
+      Board Selected Entities and Accounts
+  </h2>
+</div>
+
+
+<table id="ans">
+
+  <th>Number</th>
+   <th>Account</th>
+    <th>Entity</th>
+
+ </tr>
+ <tr>
+  <td>1</td>
+  <td></td>
+  <td></td>
+
+ </tr>
+  <tr>
+  <td>2</td>
+  <td></td>
+  <td></td>
+ </tr>
+</table>
+
+</br>
+
+
+<div id="border-radius">
+  <h2>
+       Slider Selected Accounts and Account Status
+    </h2>
+</div>
+
+<table id="ans1">
+ <tr>
+  <th>Number</th>
+   <th>Account</th>
+    <th>Entity Status</th>
+   <th>DR or CR</th>
+
+ </tr>
+ <tr>
+  <td>1</td>
+  <td></td>
+  <td></td>
+  <td></td>
+
+ </tr>
+  <tr>
+  <td>2</td>
+  <td></td>
+  <td></td>
+  <td></td>
+
+ </tr>
+</table>
+</div>
+</body>
+</html>
